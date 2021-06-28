@@ -9,6 +9,5 @@ CREATE TABLE listings (
   quantity INTEGER,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   status VARCHAR(255) CHECK (status IN ('avaliable', 'pending', 'sold')),
-  created_at DATE,
-  completed_at DATE
+  created_at DATE
 );
