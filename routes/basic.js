@@ -46,7 +46,7 @@ module.exports = (db) => {
 
    //Get user with specific id
   router.get("/users/:user_id", (req, res) => {
-    db.query(`SELECT * FROM users where users.id = ${req.params.user_id}`)
+    db.query(`SELECT * FROM users where users.id = $1`, [req.params.user_id])
       .then(data => {
         const users = data.rows;
         res.json({ users });
@@ -60,7 +60,7 @@ module.exports = (db) => {
   // Get all listings favourited by a user
   router.get("/users/:user_id/favourites", (req, res) => {
     console.log(req.params)
-    db.query(`SELECT listings.* FROM users JOIN favourites ON user_id = users.id JOIN listings ON listings.id = listing_id where users.id = ${req.params.user_id}`)
+    db.query(`SELECT listings.* FROM users JOIN favourites ON user_id = users.id JOIN listings ON listings.id = listing_id where users.id = $1` , [req.params.user_id])
       .then(data => {
         const favourites = data.rows;
         res.json(favourites);
