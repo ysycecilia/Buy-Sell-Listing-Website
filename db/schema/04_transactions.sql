@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS transactions CASCADE;
+CREATE TABLE transactions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  listing_id INTEGER REFERENCES listings(id) ON DELETE CASCADE,
+  seller_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  buyer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  completed_at TIMESTAMP
+);
