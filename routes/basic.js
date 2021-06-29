@@ -3,10 +3,10 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings LIMIT 3;`)
+    db.query(`SELECT * FROM listings;`)
       .then(data => {
-        const listings = data.rows;
-        res.json({listings});
+        const templateVars = { items: data.rows };
+        res.render("home", templateVars);
       })
       .catch(err => {
         res
@@ -139,6 +139,46 @@ module.exports = (db) => {
       .then(
         res.status(200).send(`Listing deleted with ID: ${listing_id}`)
       )
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
+  router.post("/users/:user_id/favourites", (req, res) => {
+    // const user_id = req.session.userId;
+    console.log(req.body);
+    const user_id = req.params.id;
+    //const listing_id = parseInt(req.params.id);
+    const listing_id = req.body.listing_id;
+    db.query(`
+    INSERT INTO favourites (user_id, listing_id)
+    VALUES ($1, $2)
+    RETURNING *;`, [user_id, listing_id])
+      .then(data => {
+        const listing = data.rows;
+        res.json({listing});
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    // };
+  });
+
+  router.get("/users/:user_id/favourites", (req, res) => {
+    const sqlQuery = `SELECT * FROM favourites
+    JOIN listings ON listing_id = listings.id
+    WHERE favourites.id IN (SELECT favourites.id FROM favourites);`;
+    db.query(sqlQuery)
+      .then(data => {
+        console.log(data.rows);
+        const templateVars = { items: data.rows };
+        res.render("home", templateVars);
+      })
       .catch(err => {
         res
           .status(500)
