@@ -3,10 +3,10 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings LIMIT 3;`)
+    db.query(`SELECT * FROM listings LIMIT 5;`)
       .then(data => {
         const listings = data.rows;
-        res.json({listings});
+        res.json(listings);
       })
       .catch(err => {
         res
