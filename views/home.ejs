@@ -68,17 +68,21 @@
           </button>
         </div>
         <hr style="width:100%;text-align:left;margin-left:0">
-        <div>
-          Category
-        </div>
-        <div>
-          Max Price
-        </div>
-        <div>
-          Min Price
-        </div>
-        <div>
-          <button class="btn btn-primary" type="submit" id="filter">FILTER</button>
+        <form id="search-item-form" class="search-item-form">
+
+          <div class="search-item-form__field-wrapper">
+            <label for="search-item-form__minimum-price">Minimum Price</label>
+            <input type="number" name="minimum_price" placeholder="Minimum Price" id="search-item-form__minimum-price">
+            <label for="search-item-form__maximum-price">Maximum Price</label>
+            <input type="number" name="maximum_price" placeholder="Maximum Price" id="search-item-form__maximum-price">
+          </div>
+      
+          <div class="search-item-form__field-wrapper">
+              <button type="submit" class="btn btn-primary">Filter</button>
+          </div>
+        
+        </form>
+          
         </div>
       </nav>
       </div>

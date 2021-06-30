@@ -22,7 +22,6 @@ module.exports = (db) => {
   router.get("/listings/:id", (req, res) => {
 
     db.query(`SELECT id, title, price, description, user_id FROM listings WHERE id =$1;`, [req.params.id])
-<<<<<<< HEAD
     .then(data => {
       const item = data.rows[0];
       res.json(item);
@@ -33,18 +32,6 @@ module.exports = (db) => {
         .json({ error: err.message });
     });
   })
-=======
-      .then(data => {
-        const item = data.rows[0];
-        res.render('listings', item);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
->>>>>>> refs/remotes/origin/dev
 
 
   router.get("/users/:userId/listings", (req, res) => {
