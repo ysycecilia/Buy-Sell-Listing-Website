@@ -2,7 +2,7 @@ $(document).ready(function() {
   console.log('This is listings');
   //Function creates listing element
   const createListingElement = function(listing) {
-    const $listing = $(`<div class="card" style="width: 300px;">
+    const $listing = $(`<div class="card ml-2 mr-2" style="width: 300px;">
     <img src=${listing.cover_picture_url} class="card-img-top" alt="...">
     <div class="card-body text-center">
         <h5 class="card-title">${listing.title}</h5>

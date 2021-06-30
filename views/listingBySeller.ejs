@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>${users.id}'s' listings</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/listingBySeller.css" type="text/css" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript" src="/scripts/featureListings.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-default fixed-top">
+      <div class="navbar-brand col">
+        <a class="navbar-brand col" href="/">Logo</a>
+      </div>
+
+      <div class="nav-item nav-link col" id="links">
+
+        <a href=""> Search </a>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Fiction</a></li>
+            <li><a href="#">Non-fiction</a></li>
+            <li><a href="#"></a>Finance</li>
+            <li><a href="#">Politics</a></li>
+          </ul>
+        </div>
+        <a href=""> MyListings</a>
+
+      </div>
+      <div class="col" id="avatar">
+        <a href=""> <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg" class="imp-responsive img-rounded  .img-fluid. " style="max-width: 7rem; max-height: 7rem;"alt=""></a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+    <div class='container-fluid'>
+      <div class='row'>
+
+          <nav class="col-xs-6 col-md-6 col-lg-3 col-xs-6 col-md-6 col-lg-3" id='sidebar'>
+            <div class="profile-sidebar">
+              <!-- SIDEBAR USERPIC -->
+              <div class="userpic">
+                <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg" class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 150px; max-height: 150px;"alt="">
+              </div>
+              <!-- END SIDEBAR USERPIC -->
+              <!-- SIDEBAR USER TITLE -->
+              <div class="profile-usertitle">
+                <div class="profile-usertitle-name">
+                  Senay Hailu
+                </div>
+              </div>
+              <div>
+                Seller
+              </div>
+              <!-- END SIDEBAR USER TITLE -->
+              <!-- SIDEBAR BUTTONS -->
+              <div class="profile-userbuttons">
+                <button type="button" class="btn btn-info btn-sm">Message</button>
+              </div>
+              <div>
+                <a href="/users/:user_id/listings">
+                  Seller's Listings
+                </a>
+              </div>
+          </nav>
+          <div class="col-xs-6 col-md-6 col-lg-9">
+            <div id="listing-header">
+              <H4>${listings.title}</H4>
+            </div>
+        <div  id='gallery'>
+
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
