@@ -174,8 +174,8 @@ module.exports = (db) => {
     WHERE favourites.id IN (SELECT favourites.id FROM favourites);`;
     db.query(queryString)
       .then(data => {
-        const templateVars = { items: data.rows };
-        res.render("favourite", templateVars);
+        const favourites = data.rows;
+        res.json({ favourites });
       })
       .catch(err => {
         res
@@ -186,10 +186,9 @@ module.exports = (db) => {
 
   //favourite icon: save a fav record
   router.post("/users/:user_id/favourites", (req, res) => {
-    console.log("user_id and listing_id", req.body.user_id, req.body.listing_id);
+    //const listing_id = parseInt(req.params.id);
     // const user_id = req.session.userId;
     const user_id = req.body.user_id;
-    //const listing_id = parseInt(req.params.id);
     const listing_id = req.body.listing_id;
 
     db.query(`
