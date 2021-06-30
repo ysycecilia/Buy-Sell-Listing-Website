@@ -17,8 +17,6 @@ $(document).ready(function() {
     return $listing;
   };
 
-
-
   //Function renders all listings
   const renderListings = function(listings) {
     const $gallery = $('#gallery');
@@ -38,6 +36,10 @@ $(document).ready(function() {
     })
       .then(function(listings) {
         renderListings(listings); // -> undefined
+
+        //Notice: -----------------------------
+        //please keep the whole favourite part sits inside loadLising.then()
+        //it need the loaded elements to be liked or it won't work
 
         const $favListing = $('.fa-heart');
         $favListing.click(function(e) {
@@ -81,9 +83,23 @@ $(document).ready(function() {
               });
           }
         });
-      }
-      );
-  };
+      })
+  }
+  // const loadListings = (listings) => {
+  //   // fetch the listings
+  //   $.get('/home')
+  //     .then((listings) => {
+  //       // console.log(listings);
+  //       renderListings(listings);
+  //     });
+  // };
+  const $search = $('#search-item-form')
+  $search.submit(function(event) {
+    event.preventDefault();
+
+    const data = $(this).serialize();
+    loadListings(`/home/search?${data}`)
+  });
 
 
   loadListings('/home');
