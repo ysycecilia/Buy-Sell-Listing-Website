@@ -7,8 +7,7 @@ $(document).ready(function() {
     <div class="card-body text-center">
         <h5 class="card-title">${listing.title}</h5>
 
-        <i class="far fa-heart" data-listing="${listing.id}"
-        data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart"></i>
+        <i class="far fa-heart" data-listing="${listing.id}" data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart"></i>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
         <a href="#" class="btn btn-primary">View Profile</a>
