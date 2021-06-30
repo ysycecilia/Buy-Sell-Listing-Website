@@ -39,16 +39,13 @@ $(document).ready(function() {
       .then(function(listings) {
         renderListings(listings); // -> undefined
 
-        console.log(listings);
         const $favListing = $('.fa-heart');
         $favListing.click(function(e) {
 
           if ($(e.target).data("id") === "far-fa-heart") {
             e.preventDefault();
-            // const data = $(this).serialize();
 
             $(e.target).removeClass("far fa-heart").addClass("fas fa-heart").css("color", "red");
-
             $(e.target).data('id', "fas-fa-heart");
 
             // $.ajax({
@@ -58,16 +55,19 @@ $(document).ready(function() {
             // }).done((data) => {
             //   console.log('fav saved : ', data);
             // });
+            let user_id = $(this).attr('data-user');
 
-            $.post('/home/users/:user_id/favourites',
+            $.post(`/home/users/${user_id}/favourites`,
               {listing_id: $(this).attr('data-listing'),
                 user_id: $(this).attr('data-user')
               })
               .then((data) => {
+
                 console.log('fav saved : ', data);
               });
           } else {
             e.preventDefault();
+
             $(e.target).removeClass("fas fa-heart").addClass("far fa-heart");
             $(e.target).data('id', "far-fa-heart");
 
