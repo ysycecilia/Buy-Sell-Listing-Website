@@ -29,9 +29,6 @@ body {
 
   .container-fluid {
     height: 100%;
-
-
-
   }
 
   main {
@@ -45,6 +42,7 @@ body {
   #gallery {
      display: flex;
      flex-flow: row wrap;
+     padding: 30px
   }
 
   #sidebar {
@@ -73,5 +71,10 @@ body {
 #filter {
   display: flex;
   justify-content: flex-end;
+}
+
+#listing-image {
+  min-height: 50%;
+  max-height: 50%;
 }
 

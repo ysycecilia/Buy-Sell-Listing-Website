@@ -2,15 +2,16 @@ $(document).ready(function() {
   console.log('This is listings');
   //Function creates listing element
   const createListingElement = function(listing) {
-    const $listing = $(`<div class="card ml-2 mr-2" style="width: 300px;">
-    <img src=${listing.cover_picture_url} class="card-img-top" alt="...">
+    const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
+    <i class="far fa-heart" data-listing="${listing.id}"
+    data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
+
+    <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
         <h5 class="card-title">${listing.title}</h5>
-
-        <i class="far fa-heart" data-listing="${listing.id}" data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart"></i>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="#" class="btn btn-primary">View Profile</a>
+        <a href="#" class="btn btn-primary">View Listing</a>
     </div>
 </div>`);
     return $listing;
@@ -79,19 +80,11 @@ $(document).ready(function() {
                 console.log('fav deleted : ', data);
               });
           }
-
         });
-      });
+      }
+      );
   };
-  // const loadListings = (listings) => {
-  //   // fetch the listings
-  //   $.get('/home')
-  //     .then((listings) => {
-  //       // console.log(listings);
-  //       renderListings(listings);
-  //     });
-  // };
+
 
   loadListings('/home');
-
 });
