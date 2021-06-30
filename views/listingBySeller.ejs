@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/listingBySeller.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -64,16 +65,15 @@
               <div>
                 Seller
               </div>
+              <div>
+                Member since ${users.member_since}
+              </div>
               <!-- END SIDEBAR USER TITLE -->
               <!-- SIDEBAR BUTTONS -->
               <div class="profile-userbuttons">
                 <button type="button" class="btn btn-info btn-sm">Message</button>
               </div>
-              <div>
-                <a href="/users/:user_id/listings">
-                  Seller's Listings
-                </a>
-              </div>
+
           </nav>
           <div class="col-xs-6 col-md-6 col-lg-9">
             <div id="listing-header">
