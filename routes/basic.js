@@ -23,7 +23,7 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    db.query(`SELECT listings.* FROM listings LIMIT 5 ;`)
+    db.query(`SELECT * FROM listings LIMIT 10;`)
       .then(data => {
         // const templateVars = { data: data.rows};
         // console.log(templateVars)
@@ -117,13 +117,14 @@ module.exports = (db) => {
 
 
   router.post("/listings", (req, res) => {
+    console.log("This is request", req.body)
     const title = req.body.title;
     const description = req.body.description;
     const price = req.body.price;
     const quantity = req.body.quantity;
     const category_id = req.body.category_id;
     const status = req.body.status;
-    const created_at = req.body.created_at;
+    const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const cover_picture_url = req.body.cover_picture_url;
     // const user_id = req.session.userId;
     const user_id = 1;
@@ -136,10 +137,12 @@ module.exports = (db) => {
         res.json({listing});
       })
       .catch(err => {
+        console.error(err);
         res
           .status(500)
           .json({ error: err.message });
       });
+      // res.json({name: 'Senay'})
 
   });
 

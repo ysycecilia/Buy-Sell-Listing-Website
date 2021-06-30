@@ -58,8 +58,11 @@ app.get("/", (req, res) => {
 app.get("/seller", (req, res) => {
   res.render("listingBySeller");
 });
-app.post("/newListing", (req, res) => {
-  res.render("home");
+app.get("/newListing", (req, res) => {
+  res.render("createNewListing");
+});
+app.get("/listingDetails/:id", (req, res) => {
+  res.render("listingDetails");
 });
 app.get("/search", (req, res) => {
   res.render("filter");
