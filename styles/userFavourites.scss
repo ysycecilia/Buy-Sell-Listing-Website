@@ -1,0 +1,72 @@
+body {
+  background-color: rgb(231, 226, 226);
+
+  nav {
+    height: 100px;
+    padding: 5px;
+    box-shadow: 5px 4px 5px #000;
+
+    #avatar {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #links {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .container-fluid {
+    height: 100%;
+
+
+
+  }
+
+  main {
+    display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: space-around;
+  padding-top: 100px;
+  }
+
+  #gallery {
+     display: flex;
+     flex-flow: row wrap;
+  }
+
+  #sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 1.2em;
+    min-height: 100vh;
+    background-color:rgb(251, 237, 237);
+
+    div {
+      div {
+
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+      }
+    }
+  }
+  #listing-header {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  h1 {
+    color: #244751;
+  }
+}
+
+#filter {
+  display: flex;
+  justify-content: flex-end;
+}

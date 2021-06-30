@@ -10,13 +10,13 @@
 </head>
 <body>
   <p>Hello</p>
-  <p>Title: <%= title %></p>
-  <p>Price: <%= price %></p>
-  <p>Description: <%= description %></p>
+  <p>Title: <%=data.title %></p>
+  <p>Price: <%=data.price %></p>
+  <p>Description: <%=data.description %></p>
   
   <form class="toggle-favourites">
-    <input value="<%=id%>" type="hidden" name="listing_id" id="listing_id"/>
-    <input value="<%=user_id%>" type="hidden" name="user_id" id="user_id"/>
+    <input value="<%=data.id%>" type="hidden" name="listing_id" id="listing_id"/>
+    <input value="<%=data.user_id%>" type="hidden" name="user_id" id="user_id"/>
     <button type="submit" id="button-submit" >Favourite</button>
   </form>
   <p class="submit-status"></p>

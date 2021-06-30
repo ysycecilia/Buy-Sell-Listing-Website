@@ -44,6 +44,13 @@ $(document).ready(function() {
   //       renderListings(listings);
   //     });
   // };
+  const $search = $('#search-item-form')
+  $search.submit(function(event) {
+    event.preventDefault();
+   
+    const data = $(this).serialize();
+    loadListings(`/home/search?${data}`)
+  })
 
   loadListings('/home');
 

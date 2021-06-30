@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <title>${users.id}'s' listings</title>
+  <title><%=name%>'s' listings</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/listingBySeller.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/userFavourites.scss" type="text/css" />
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -17,13 +17,13 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-default fixed-top">
+    <nav id="favourite-nav" class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
       <div class="navbar-brand col">
-        <a class="navbar-brand col" href="/">Logo</a>
+        <a class="navbar-brand col" href="/"><img src="Buy-Sell-Listing-Website/public/images/logo.png" class="img-rounded"></a>
       </div>
-
+  
       <div class="nav-item nav-link col" id="links">
-
+  
         <a href=""> Search </a>
         <div class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
@@ -34,17 +34,18 @@
             <li><a href="#">Bottom Wear</a></li>
           </ul>
         </div>
-        <a href=""> MyListings</a>
-
+        <a href="" id="fave"> My Favourites</a>
+  
       </div>
       <div class="col" id="avatar">
-        <a href=""> <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg" class="imp-responsive img-rounded  .img-fluid. " style="max-width: 7rem; max-height: 7rem;"alt=""></a>
+        <a href=""> AVATAR <%=avatar%></a>
       </div>
-
+  
     </nav>
   </header>
 
   <main>
+    
     <div class='container-fluid'>
       <div class='row'>
 
@@ -58,12 +59,13 @@
               <!-- SIDEBAR USER TITLE -->
               <div class="profile-usertitle">
                 <div class="profile-usertitle-name">
-                  Senay Hailu
+                  <Senay Hailu>
                 </div>
               </div>
               <div>
                 Seller
               </div>
+              <p> hello world</p>
               <!-- END SIDEBAR USER TITLE -->
               <!-- SIDEBAR BUTTONS -->
               <div class="profile-userbuttons">

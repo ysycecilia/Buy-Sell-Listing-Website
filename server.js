@@ -54,6 +54,9 @@ app.get("/", (req, res) => {
 app.get("/seller", (req, res) => {
   res.render("listingBySeller");
 });
+app.get("/search", (req, res) => {
+  res.render("filter");
+});
 
 
 
