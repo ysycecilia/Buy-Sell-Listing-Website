@@ -51,6 +51,9 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.get("/", (req, res) => {
   res.render("home");
 });
+app.get("/seller", (req, res) => {
+  res.render("listingBySeller");
+});
 
 
 
