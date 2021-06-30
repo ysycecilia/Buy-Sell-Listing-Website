@@ -2,8 +2,25 @@ const express = require('express');
 const router  = express.Router();
 
 
-
 module.exports = (db) => {
+  //if id exists, return its email
+  const getEmailBySessionID = (id) => {
+
+    db.query(`select email from users where users.id = ${id};`)
+      .then(data => {
+        return data.rows[0].email;
+      });
+  };
+  let userEmail;
+  //take an user id from input and save it to session, and get user's email
+  router.get("/login/:id", (req, res) => {
+    req.session.user_id = req.params.id;
+    db.query(`select email from users where users.id = ${req.session.user_id};`)
+      .then(data => {
+        userEmail = data.rows[0].email;
+      });
+    res.redirect('/');
+  });
 
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM listings LIMIT 5;`)
@@ -37,7 +54,7 @@ module.exports = (db) => {
 
     db.query(`SELECT title, price, description FROM listings
     JOIN users ON user_id = users.id
-    WHERE user_id =$1 ;`, [req.params.userId])
+    WHERE user_id =$1 ;`, [req.session.user_id])
       .then(data => {
         const item = data.rows;
         res.json({item});
@@ -52,7 +69,7 @@ module.exports = (db) => {
   //Get user with specific id
   router.get("/users/:user_id", (req, res) => {
 
-    db.query(`SELECT * FROM users where users.id = $1`, [req.params.user_id])
+    db.query(`SELECT * FROM users where users.id = $1`, [req.session.user_id])
       .then(data => {
         const users = data.rows;
         res.json({ users });
@@ -223,6 +240,9 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+
 
   return router;
 };
