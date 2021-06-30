@@ -1,9 +1,64 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: #EEE;
+  background-color: rgb(231, 226, 226);
+
+  nav {
+    height: 100px;
+    padding: 5px;
+    box-shadow: 5px 4px 5px #000;
+
+    #avatar {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #links {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .container-fluid {
+    height: 100%;
+
+
+
+  }
+
+  main {
+    display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: space-around;
+  padding-top: 100px;
+  }
+
+  #gallery {
+     display: flex;
+     flex-flow: row wrap;
+  }
+
+  #sidebar {
+    padding-top: 30px;
+    font-size: 1.5em;
+    height: 600px;
+    background-color:rgb(251, 237, 237);
+
+    div {
+      padding: 5px;
+    }
+  }
+
+
 
   h1 {
     color: #244751;
   }
 }
+
+#filter {
+  display: flex;
+  justify-content: flex-end;
+}
+
