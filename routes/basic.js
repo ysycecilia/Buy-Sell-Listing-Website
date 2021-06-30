@@ -2,14 +2,32 @@ const express = require('express');
 const router  = express.Router();
 
 
-
 module.exports = (db) => {
+  //if id exists, return its email
+  const getEmailBySessionID = (id) => {
+
+    db.query(`select email from users where users.id = ${id};`)
+      .then(data => {
+        return data.rows[0].email;
+      });
+  };
+  let userEmail;
+  //take an user id from input and save it to session, and get user's email
+  router.get("/login/:id", (req, res) => {
+    req.session.user_id = req.params.id;
+    db.query(`select email from users where users.id = ${req.session.user_id};`)
+      .then(data => {
+        userEmail = data.rows[0].email;
+      });
+    res.redirect('/');
+  });
 
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings LIMIT 5;`)
+    db.query(`SELECT listings.* FROM listings LIMIT 5 ;`)
       .then(data => {
-        const listings = data.rows;
-        res.json(listings);
+        // const templateVars = { data: data.rows};
+        // console.log(templateVars)
+        res.json(data.rows);
       })
       .catch(err => {
         res
@@ -21,9 +39,10 @@ module.exports = (db) => {
   router.get("/listings/:id", (req, res) => {
 
     db.query(`SELECT id, title, price, description, user_id FROM listings WHERE id =$1;`, [req.params.id])
+
       .then(data => {
         const item = data.rows[0];
-        res.render('listings', item);
+        res.json(item);
       })
       .catch(err => {
         res
@@ -37,7 +56,7 @@ module.exports = (db) => {
 
     db.query(`SELECT title, price, description FROM listings
     JOIN users ON user_id = users.id
-    WHERE user_id =$1 ;`, [req.params.userId])
+    WHERE user_id =$1 ;`, [req.session.user_id])
       .then(data => {
         const item = data.rows;
         res.json({item});
@@ -52,7 +71,7 @@ module.exports = (db) => {
   //Get user with specific id
   router.get("/users/:user_id", (req, res) => {
 
-    db.query(`SELECT * FROM users where users.id = $1`, [req.params.user_id])
+    db.query(`SELECT * FROM users where users.id = $1`, [req.session.user_id])
       .then(data => {
         const users = data.rows;
         res.json({ users });
@@ -63,6 +82,39 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  // Get all listings favourited by a user
+  router.get("/users/:user_id/favourites", (req, res) => {
+
+    console.log(req.params);
+    db.query(`SELECT listings.*, users.* FROM users JOIN favourites ON user_id = users.id JOIN listings ON listings.id = listing_id where users.id = ${req.params.user_id}`)
+
+      .then(data => {
+
+        res.json(data.rows);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.post("/users/:user_id/favourites", (req, res) => {
+    db.query(`INSERT INTO favourites(listing_id, user_id)
+    VALUES($1, $2)`, [req.body.listing_id, req.params.user_id])
+      .then(data => {
+        const favourites = data.rows;
+        console.log(favourites);
+        res.json(favourites);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
 
   router.post("/listings", (req, res) => {
     const title = req.body.title;
@@ -91,25 +143,30 @@ module.exports = (db) => {
 
   });
 
+
+  //filter price
   router.get("/search", (req, res)=> {
 
     const minimum_price = req.query.minimum_price;
     const maximum_price = req.query.maximum_price;
 
+
     const queryParams = [];
-    let queryString = `SELECT listings.* FROM listings`;
-    if (minimum_price && maximum_price) {
+    let queryString = `SELECT * FROM listings WHERE 1=1`;
+    if (minimum_price) {
       queryParams.push(parseInt(minimum_price));
-      queryString += ` WHERE price >= $${queryParams.length}`;
+      queryString += ` AND price >= $${queryParams.length}`;
+    }
+    if (maximum_price) {
       queryParams.push(parseInt(maximum_price));
       queryString += ` AND price <= $${queryParams.length} `;
     }
     queryString += ` GROUP BY listings.id; `;
-
+    console.log('line', queryString);
     db.query(queryString, queryParams)
       .then(data => {
         const result = data.rows;
-        res.render('filter', result);
+        res.json(result);
       })
       .catch(err => {
         res
@@ -118,6 +175,9 @@ module.exports = (db) => {
       });
 
   });
+
+
+
 
   //update an existing listing by id
   router.post("/listings/:id", (req, res) => {
@@ -223,6 +283,9 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+
 
   return router;
 };
