@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  console.log('This is listings');
+  console.log('This is fav listings');
   //Function creates listing element
   const createListingElement = function(listing) {
     const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
@@ -16,6 +16,7 @@ $(document).ready(function() {
 </div>`);
     return $listing;
   };
+
 
   //Function renders all listings
   const renderListings = function(listings) {
@@ -36,10 +37,6 @@ $(document).ready(function() {
     })
       .then(function(listings) {
         renderListings(listings); // -> undefined
-
-        //Notice: -----------------------------
-        //please keep the whole favourite part sits inside loadLising.then()
-        //it need the loaded elements to be liked or it won't work
 
         const $favListing = $('.fa-heart');
         $favListing.click(function(e) {
@@ -83,23 +80,9 @@ $(document).ready(function() {
               });
           }
         });
-      })
-  }
-  // const loadListings = (listings) => {
-  //   // fetch the listings
-  //   $.get('/home')
-  //     .then((listings) => {
-  //       // console.log(listings);
-  //       renderListings(listings);
-  //     });
-  // };
-  const $search = $('#search-item-form')
-  $search.submit(function(event) {
-    event.preventDefault();
-
-    const data = $(this).serialize();
-    loadListings(`/home/search?${data}`)
-  });
+      }
+      );
+  };
 
 
   loadListings('/home');
