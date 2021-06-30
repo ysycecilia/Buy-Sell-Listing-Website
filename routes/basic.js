@@ -81,9 +81,6 @@ module.exports = (db) => {
   });
 
   router.post("/users/:user_id/favourites", (req, res) => {
-    console.log('first',req.body)
-    console.log("hello world")
-    //first create variable for all listing_id of a particular user_id
     db.query(`INSERT INTO favourites(listing_id, user_id)
     VALUES($1, $2)`, [req.body.listing_id, req.params.user_id])
       .then(data => {
@@ -113,7 +110,7 @@ module.exports = (db) => {
         queryString += ` AND price <= $${queryParams.length} `;
       }
       queryString += ` GROUP BY listings.id; `;
-      console.log(queryParams);
+      
       db.query(queryString, queryParams)
         .then(data => {
           const result = data.rows;

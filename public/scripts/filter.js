@@ -8,7 +8,7 @@ $(() => {
       url: '/home/search',
       data: data
     })
-    .done(function(data) {
+    .then((data) => {
       console.log(data)
     })
   })
