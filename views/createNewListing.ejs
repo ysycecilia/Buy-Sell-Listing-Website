@@ -12,12 +12,15 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/createNewListing.css" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script type="text/javascript" src="/scripts/featureListings.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/4.5.0/lib/js/emojione.min.js" integrity="sha512-E2Ai/A9+KcoBm0lvfnd5krbr7TWUigQGWTfcoMToNpfmCvQKkZdTbpwyIM4PFbCGMtSmMjE/DAXGjVXpWGdFaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/4.5.0/lib/js/emojione.min.js"
+    integrity="sha512-E2Ai/A9+KcoBm0lvfnd5krbr7TWUigQGWTfcoMToNpfmCvQKkZdTbpwyIM4PFbCGMtSmMjE/DAXGjVXpWGdFaQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -27,8 +30,8 @@
 
       <div class="navbar-brand col" style="
       padding-left: 0px;">
-        <a class="logo-image" href="/">
-          <img src="images/logo.png" class="img-rounded" />
+        <a  href="/">
+          <img id="logo-image" src="images/logo.png" class="img-rounded">
         </a>
       </div>
 
@@ -55,46 +58,65 @@
   </header>
 
   <main>
-    <div class='container-fluid'>
+    <!-- <div class='container-fluid'>
       <div class='row'>
-        <div class="col-xs-6 col-md-6 col-lg-3 wrapper" >
-          <nav id='sidebar'>
-          <div class="input-group">
-            <div class="form-outline">
-              <input type="search" id="form1" class="form-control" />
+        <div class="col-xs-6 col-md-6 col-lg-3 wrapper"> -->
+
+        </div>
+        <div id="new-listing" class="col-lg-9 col-md-6">
+        <div class="card ml-1 mr-1 col-lg-6 col-md-4" id="main-field">
+          <form id="listing-form">
+            <label><h4>CREATE NEW LISTING</h4></label>
+            <div class="form-group">
+              <label for="listingTitle">Title</label>
+              <input type="title" class="form-control" id="listingTitle" aria-describedby="emailHelp" placeholder="Title">
             </div>
-            <button type="button" class="btn btn-primary">
-            Search
-          </button>
-        </div>
-        <hr style="width:100%;text-align:left;margin-left:0">
-        <div>
-          Category
-        </div>
-        <div>
-          Max Price
-        </div>
-        <div>
-          Min Price
-        </div>
-        <div>
-          <button class="btn btn-primary" type="submit" id="filter">FILTER</button>
-        </div>
-      </nav>
+            <div class="form-group">
+              <label for="listingDescription">Description</label>
+              <input type="text" class="form-control" id="listingDescription" placeholder="Description">
+            </div>
+
+            <div class="form-group">
+              <label for="listingPrice">Price</label>
+              <input type="number" class="form-control" id="listingPrice" placeholder="Price">
+            </div>
+            <div class="form-group">
+              <label for="listingQuantitiy">Quantity</label>
+              <input type="number" class="form-control" id="listingQuantitiy" placeholder="Quantity">
+            </div>
+            <div class="form-group">
+              <label for="listingPicture">Item picture</label>
+              <input type="url" class="form-control" id="listingPicture" placeholder="Item picture">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Category</label>
+              <select class="form-control" id="categorySelect">
+                <option>Fiction</option>
+                <option>Non-fiction</option>
+                <option>Sci-fi</option>
+                <option>Romance</option>
+                <option>Finance</option>
+              </select>
+            </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <div class="col-xs-6 col-md-6 col-lg-9 thumb" id='gallery'>
+
+        <!-- </div>
       </div>
-      </div>
 
-    </div>
-
-  </div>
+    </div> -->
 
 
 
-</main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
 </body>
 

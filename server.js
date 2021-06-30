@@ -54,6 +54,9 @@ app.get("/", (req, res) => {
 app.get("/seller", (req, res) => {
   res.render("listingBySeller");
 });
+app.post("/newListing", (req, res) => {
+  res.render("home");
+});
 
 
 

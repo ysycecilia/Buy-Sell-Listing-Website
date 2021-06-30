@@ -19,7 +19,6 @@ $(document).ready(function() {
   };
 
 
-
   //Function renders all listings
   const renderListings = function(listings) {
     const $gallery = $('#gallery');
@@ -85,9 +84,6 @@ $(document).ready(function() {
           }
 
         });
-      // });
-  // };
-
 
   loadListings('/home');
 
