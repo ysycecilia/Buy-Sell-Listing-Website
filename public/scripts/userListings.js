@@ -1,10 +1,10 @@
 $(document).ready(function() {
-  console.log('This is fav listings');
-  //Function creates listing element
+  console.log('This is listings');
+  //create listings for a particular user
   const createListingElement = function(listing) {
+    console.log(listing)
     const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
-    <i class="far fa-heart" data-listing="${listing.listing_id}"
-    data-user="${listing.userid}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Cancel Favourite</i>
+    
 
     <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
@@ -12,31 +12,22 @@ $(document).ready(function() {
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
         <a href="#" class="btn btn-primary">View Listing</a>
+        <form method="POST" action="/home/listings/${listing.id}/delete">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
     </div>
 </div>`);
     return $listing;
   };
 
-
-
   //Function renders all listings
   const renderListings = function(listings) {
     const $gallery = $('#gallery');
     $gallery.empty();
-console.log(listings);
+
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
     }
-
-    const emailTO = listings[0].email;
-
-    $('#email').attr("href", `mailto:${emailTO}?subject=Inquire for you listing on Lightmazon!`);
-
-    const userName = listings[0].name;
-    $('.profile-usertitle-name').text(`${userName}`);
-
-    const userPic = listings[0].avatar_url;
-    $('#userAvatar').attr("src", `${userPic}`);
 
   };
 
@@ -47,41 +38,17 @@ console.log(listings);
       dataType: 'json'
     })
       .then(function(listings) {
+        console.log(listings)
         renderListings(listings); // -> undefined
 
+        //Notice: -----------------------------
+        //please keep the whole favourite part sits inside loadLising.then()
+        //it need the loaded elements to be liked or it won't work
+
         const $favListing = $('.fa-heart');
-        $favListing.addClass("far fa-heart").css("color", "red");
         $favListing.click(function(e) {
 
           if ($(e.target).data("id") === "far-fa-heart") {
-            e.preventDefault();
-
-            $(e.target).removeClass("fas fa-heart").css("color", "black");
-            $(e.target).data('id', "far-fa-heart");
-
-            let user_id = $(this).attr('data-user');
-
-            $.post(`/home/users/${user_id}/favourites/delete`,
-              {listing_id: $(this).attr('data-listing')
-              })
-              .then((data) => {
-                console.log('fav deleted : ', data);
-              });
-
-          } else {
-            // e.preventDefault();
-
-            // $(e.target).removeClass("fas fa-heart").addClass("far fa-heart");
-            // $(e.target).data('id', "far-fa-heart");
-
-            // let user_id = $(this).attr('data-user');
-
-            // $.post(`/home/users/${user_id}/favourites/delete`,
-            //   {listing_id: $(this).attr('data-listing')
-            //   })
-            //   .then((data) => {
-            //     console.log('fav deleted : ', data);
-            //   });
             e.preventDefault();
 
             $(e.target).removeClass("far fa-heart").addClass("fas fa-heart").css("color", "red");
@@ -104,11 +71,41 @@ console.log(listings);
 
                 console.log('fav saved : ', data);
               });
+          } else {
+            e.preventDefault();
+
+            $(e.target).removeClass("fas fa-heart").addClass("far fa-heart");
+            $(e.target).data('id', "far-fa-heart");
+
+            let user_id = $(this).attr('data-user');
+
+            $.post(`/home/users/${user_id}/favourites/delete`,
+              {listing_id: $(this).attr('data-listing')
+              })
+              .then((data) => {
+                console.log('fav deleted : ', data);
+              });
           }
         });
-      }
-      );
-  };
+      })
+  }
+  // const loadListings = (listings) => {
+  //   // fetch the listings
+  //   $.get('/home')
+  //     .then((listings) => {
+  //       // console.log(listings);
+  //       renderListings(listings);
+  //     });
+  // };
+  const $search = $('#search-item-form')
+  $search.submit(function(event) {
+    event.preventDefault();
 
-  loadListings('/home/users/:user_id/favourites');
+    const data = $(this).serialize();
+    loadListings(`/home/search?${data}`)
+  });
+
+  loadListings('/home/users/listings')
+
+  //loadListings('/home');
 });

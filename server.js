@@ -2,13 +2,13 @@
 require('dotenv').config();
 
 // Web server config
-const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
 const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
-const app        = express();
-const morgan     = require('morgan');
+const sass = require("node-sass-middleware");
+const app = express();
+const morgan = require('morgan');
 
 
 // PG database client/connection setup
@@ -58,8 +58,17 @@ app.get("/", (req, res) => {
 app.get("/seller", (req, res) => {
   res.render("listingBySeller");
 });
+app.get("/newListing", (req, res) => {
+  res.render("createNewListing");
+});
+app.get("/listingDetails/:id", (req, res) => {
+  res.render("listingDetails");
+});
 app.get("/search", (req, res) => {
-  res.render("filter");
+  res.render("home");
+});
+app.get("/mylistings", (req, res) => {
+  res.render("userListings");
 });
 
 app.get("/favourites", (req, res) => {
@@ -70,3 +79,5 @@ app.get("/favourites", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+

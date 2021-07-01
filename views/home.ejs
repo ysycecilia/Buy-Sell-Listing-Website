@@ -27,8 +27,8 @@
 
       <div class="navbar-brand col" style="
       padding-left: 0px;">
-        <a class="logo-image" href="/">
-          <img src="images/logo.png" class="img-rounded" />
+        <a  href="/">
+          <img id="logo-image"src="images/logo.png" class="img-rounded" />
         </a>
       </div>
 
@@ -68,22 +68,28 @@
           </button>
         </div>
         <hr style="width:100%;text-align:left;margin-left:0">
-        <div>
-          Category
-        </div>
-        <div>
-          Max Price
-        </div>
-        <div>
-          Min Price
-        </div>
-        <div>
-          <button class="btn btn-primary" type="submit" id="filter">FILTER</button>
+        <form id="search-item-form" class="search-item-form">
+
+          <div class="search-item-form__field-wrapper">
+            <label for="search-item-form__minimum-price">Minimum Price</label>
+            <input type="number" name="minimum_price" placeholder="Minimum Price" id="search-item-form__minimum-price">
+            <label for="search-item-form__maximum-price">Maximum Price</label>
+            <input type="number" name="maximum_price" placeholder="Maximum Price" id="search-item-form__maximum-price">
+          </div>
+
+          <div class="search-item-form__field-wrapper">
+              <button type="submit" class="btn btn-primary">Filter</button>
+          </div>
+
+        </form>
+
         </div>
       </nav>
-      </div>
       <div class="col-xs-6 col-md-6 col-lg-9 thumb" id='gallery'>
+
       </div>
+      </div>
+
       </div>
 
     </div>

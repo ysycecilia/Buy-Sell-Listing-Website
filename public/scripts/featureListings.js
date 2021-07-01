@@ -11,11 +11,12 @@ $(document).ready(function() {
         <h5 class="card-title">${listing.title}</h5>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="#" class="btn btn-primary">View Listing</a>
+        <a href="/home/listings/${listing.id}" class="btn btn-primary">View Listing</a>
     </div>
 </div>`);
     return $listing;
   };
+
 
   //Function renders all listings
   const renderListings = function(listings) {
@@ -25,10 +26,10 @@ $(document).ready(function() {
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
     }
-
   };
 
   const loadListings = function(url) {
+    // console.log(listings);
     return $.get({
       url: url,
       method: 'GET',
@@ -100,6 +101,8 @@ $(document).ready(function() {
     const data = $(this).serialize();
     loadListings(`/home/search?${data}`)
   });
+
+ loadListings(`/home/users/${user_id}/listings`)
 
 
   loadListings('/home');
