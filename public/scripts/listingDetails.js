@@ -20,8 +20,8 @@ $(document).ready(function() {
   //Function renders all listings
   const renderListings = function(listing) {
     const $gallery = $('#gallery');
-    $gallery.empty();
-      $gallery.prepend(createListingElement(listing));
+   $gallery.empty();
+     $gallery.prepend(createListingElement(listing));
   };
 
   const loadListings = function(url) {

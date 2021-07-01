@@ -6,7 +6,6 @@ $(document).ready(function() {
     //Change data to queryformat
     const data = ($(this).serialize());
 
-    // console.log('This is it ++++', data);
     // //Validation against empty data or overlimit character usage
     // const userInput = $(this).children('.tweet-text').val();
     // //If validation failed, return false and exit form
@@ -24,15 +23,6 @@ $(document).ready(function() {
     console.log(data);
     $('form')[0].reset();
   })
-  //   $.ajax({
-  //     url: '/home/listings',
-  //     method: 'POST',
-  //     data: data
-  //   })
-  //     .then(function () {
-  //       console.log('Inside function')
 
-
-  //     })
    });
 });
