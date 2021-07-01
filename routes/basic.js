@@ -23,13 +23,13 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings LIMIT 10;`)
+    db.query(`SELECT listings.* FROM listings WHERE status = TRUE;`)
       .then(data => {
-        // const templateVars = { data: data.rows};
-        // console.log(templateVars)
-        res.json(data.rows);
+        res.json(data.rows)
       })
+      
       .catch(err => {
+        console.log("error", err)
         res
           .status(500)
           .json({ error: err.message });
@@ -50,11 +50,11 @@ module.exports = (db) => {
     });
   })
 
-
+  
   router.get("/users/listings", (req, res) => {
 
-    db.query(`SELECT title, price, description FROM listings
-    JOIN users ON user_id = users.id
+    db.query(`SELECT listings.* FROM listings
+    JOIN users ON listings.user_id = users.id
     WHERE user_id =$1 ;`, [req.session.user_id])
       .then(data => {
         const item = data.rows;
@@ -114,34 +114,43 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/listings/:id/sold", (req, res) => {
+    console.log('------',req.params.id)
+    db.query(`UPDATE listings
+    SET status = FALSE
+    WHERE user_id =$1 AND listings.id =$2;`,[req.session.user_id, req.params.id])
+    .then(data => {
+      res.json(data)
+    })
+    
+  })
+
 
   router.post("/listings", (req, res) => {
-    console.log("This is request", req.body)
     const title = req.body.title;
     const description = req.body.description;
     const price = req.body.price;
     const quantity = req.body.quantity;
     const category_id = req.body.category_id;
-    const status = req.body.status;
-    const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  
+    const created_at = req.body.created_at;
     const cover_picture_url = req.body.cover_picture_url;
+    
     // const user_id = req.session.userId;
     const user_id = 1;
     db.query(`
-      INSERT INTO listings (title, description, user_id, price, quantity, category_id, status, created_at, cover_picture_url)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-      RETURNING *;`, [title, description, user_id, price, quantity, category_id, status, created_at, cover_picture_url])
+      INSERT INTO listings (title, description, user_id, price, quantity, category_id, created_at, cover_picture_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING *;`, [title, description, user_id, price, quantity, category_id, created_at, cover_picture_url])
       .then(data => {
         const listing = data.rows;
         res.json({listing});
       })
       .catch(err => {
-        console.error(err);
         res
           .status(500)
           .json({ error: err.message });
       });
-      // res.json({name: 'Senay'})
 
   });
 
@@ -216,14 +225,18 @@ module.exports = (db) => {
 
   //delete a given listing by id
   router.post("/listings/:id/delete", (req, res) => {
+   
     const userId = req.session.user_id;
     const listing_id = parseInt(req.params.id);
-    console.log(req.body)
+    
     // const listing_id = 5;
     db.query(`DELETE FROM listings WHERE id = $1`, [listing_id])
       .then(
-        res.status(200).send(`Listing deleted with ID: ${listing_id}`)
+        // res.status(200).send(`Listing deleted with ID: ${listing_id}`)
+        res.redirect("/")
+        
       )
+      
       .catch(err => {
         res
           .status(500)

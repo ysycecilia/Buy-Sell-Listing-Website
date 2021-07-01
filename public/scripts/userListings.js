@@ -12,9 +12,10 @@ $(document).ready(function() {
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
         <a href="#" class="btn btn-primary">View Listing</a>
+        <button class="btn btn-secondary sold" data-listingid="${listing.id}">Mark As Sold</button>
         <form method="POST" action="/home/listings/${listing.id}/delete">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     </div>
 </div>`);
     return $listing;
@@ -41,6 +42,18 @@ $(document).ready(function() {
         console.log(listings)
         renderListings(listings); // -> undefined
 
+        //mark as sold - this has to be inside loadlisting to work
+        const $sold = $('.sold')
+       
+        $sold.click(function(e){
+          e.preventDefault();
+          $(e.target).html("Sold");
+          $.post(`/home/listings/${e.target.dataset.listingid}/sold`)
+              .then((data) => {
+                console.log('sold : ', data);
+              });
+        });
+        
         //Notice: -----------------------------
         //please keep the whole favourite part sits inside loadLising.then()
         //it need the loaded elements to be liked or it won't work
@@ -104,6 +117,11 @@ $(document).ready(function() {
     const data = $(this).serialize();
     loadListings(`/home/search?${data}`)
   });
+
+  
+  
+
+  
 
   loadListings('/home/users/listings')
 
