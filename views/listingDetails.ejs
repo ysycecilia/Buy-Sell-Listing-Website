@@ -63,13 +63,9 @@
             <!-- END SIDEBAR USERPIC -->
             <!-- SIDEBAR USER TITLE -->
             <div class="profile-usertitle">
-              <div class="profile-usertitle-name">
                 Senay Hailu
-              </div>
             </div>
-            <div>
-              Seller
-            </div>
+
             <div id="member">
               <span>Member since ${users.member_since}</span>
             </div>
@@ -78,28 +74,32 @@
             <div class="profile-userbuttons">
               <button type="button" class="btn btn-info btn-sm">Message</button>
             </div>
+            </div>
+
 
         </nav>
+        <!-- Main container of listing -->
         <div class="col-xs-6 col-md-6 col-lg-9">
-          <div id="listing-header">
+        <!-- <div id="header and gallery" style="width: 100%;"> -->
+          <!-- <div id="listing-header">
             <H4 > ${listings.title}</H4>
-          </div>
+          </div> -->
           <div id='gallery'>
-            <!-- <div class="card ml-1 mr-1" style="width: 300px;">
+            <!-- <div class="card ml-1 mr-1" id='each-listing'>
               <i class="far fa-heart" data-listing="${listing.id}"
               data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
 
-              <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
+              <img src='../public/images/logo.png' class="card-img-top" alt="..." id="listing-image">
               <div class="card-body text-center">
                   <h5 class="card-title">${listing.title}</h5>
                   <h4 class="card-title">$${listing.price}</h4>
                   <p class="card-text">${listing.description}</p>
-                  <a href="/home/listings/${listing.id}" class="btn btn-primary">Contact Seller</a>
               </div> -->
           </div>
 
-          </div>
+          <!-- </div> -->
         </div>
+      </div>
       </div>
     </div>
   </main>

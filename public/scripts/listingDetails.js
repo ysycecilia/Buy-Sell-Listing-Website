@@ -2,18 +2,16 @@ $(document).ready(function() {
   console.log('This is listings');
   //Function creates listing element
   const createListingElement = function(listing) {
-    const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
+    const $listing = $(`<div class="card ml-1 mr-1" id='each-listing'>
     <i class="far fa-heart" data-listing="${listing.id}"
     data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
 
-    <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
+    <img src='../public/images/logo.png' class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
         <h5 class="card-title">${listing.title}</h5>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="/home/listings/${listing.id}" class="btn btn-primary">View Listing</a>
-    </div>
-</div>`);
+    </div>`);
     return $listing;
   };
 
@@ -21,7 +19,7 @@ $(document).ready(function() {
   const renderListings = function(listing) {
     const $gallery = $('#gallery');
    $gallery.empty();
-     $gallery.prepend(createListingElement(listing));
+  $gallery.prepend(createListingElement(listing));
   };
 
   const loadListings = function(url) {
