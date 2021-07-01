@@ -38,7 +38,7 @@ module.exports = (db) => {
 
   router.get("/listings/:id", (req, res) => {
 
-    db.query(`SELECT id, title, price, description, user_id FROM listings WHERE id =$1;`, [req.params.id])
+    db.query(`select * from listings JOIN users ON user_id = users.id WHERE listings.id =$1;`, [req.params.id])
     .then(data => {
       const item = data.rows[0];
       res.render('listingDetails', item);
@@ -235,7 +235,8 @@ module.exports = (db) => {
         const listing = data.rows;
 
         console.log('This is it +++', data)
-        res.json(listing);
+       res.json(listing);
+      //  res.redirect('/');
       })
       .catch(err => {
         res

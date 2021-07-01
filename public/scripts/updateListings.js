@@ -12,9 +12,8 @@ $(document).ready(function() {
     method: 'POST',
     data: data
   }).done(function(data) {
-
-
-    console.log(data);
+    console.log('This is Senay')
+    window.location.assign(`http://localhost:8080/home/listingDetails/${dataArray[0].value}`)
     $('form')[0].reset();
   })
 

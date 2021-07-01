@@ -11,7 +11,7 @@ $(document).ready(function() {
         <h5 class="card-title">${listing.title}</h5>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="#" class="btn btn-primary">View Listing</a>
+        <a href="home/listings/${listing.id}" class="btn btn-primary">View Listing</a>
     </div>
 </div>`);
     return $listing;
@@ -23,7 +23,7 @@ $(document).ready(function() {
     $gallery.empty();
 
     for (const listing of listings) {
-      
+
       $gallery.prepend(createListingElement(listing));
     }
   };
@@ -96,7 +96,7 @@ $(document).ready(function() {
     loadListings(`/home/search?${data}`)
   });
 
- 
+
 
 
   loadListings('/home');

@@ -62,11 +62,11 @@
             <!-- END SIDEBAR USERPIC -->
             <!-- SIDEBAR USER TITLE -->
             <div class="profile-usertitle">
-                Senay Hailu
+                <%= name %>
             </div>
 
             <div id="member">
-              <span>Member since ${users.member_since}</span>
+              Member since <%= member_since %>
             </div>
             <!-- END SIDEBAR USER TITLE -->
             <!-- SIDEBAR BUTTONS -->
@@ -87,7 +87,7 @@
               <i class="far fa-heart" data-listing="${listing.id}"
               data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart"> Add to Favourites</i>
 
-              <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
+              <img src='<%= cover_picture_url %>' class="card-img-top" alt="..." id="listing-image">
               <div class="card-body text-center">
                   <h5 class="card-title"><%= title %></h5>
 
