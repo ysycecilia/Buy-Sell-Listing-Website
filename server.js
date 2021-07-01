@@ -2,13 +2,13 @@
 require('dotenv').config();
 
 // Web server config
-const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
 const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
-const app        = express();
-const morgan     = require('morgan');
+const sass = require("node-sass-middleware");
+const app = express();
+const morgan = require('morgan');
 
 
 // PG database client/connection setup
@@ -16,7 +16,11 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  secret: 'secret'
+}));
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -56,11 +60,36 @@ app.get("/seller", (req, res) => {
 });
 app.get("/newListing", (req, res) => {
   res.render("createNewListing");
+
+});
+app.get("/updateListing", (req, res) => {
+  res.render("updateListing");
+
 });
 // app.get("/listingDetails/:id", (req, res) => {
 //   res.render("listingDetails");
 // });
+app.get("/listingDetails", (req, res) => {
+  res.render("listingDetails");
+});
+app.get("/userListings", (req, res) => {
+  res.render("userListings");
+
+});
+app.get("/search", (req, res) => {
+  res.render("home");
+});
+app.get("/mylistings", (req, res) => {
+  res.render("userListings");
+});
+
+app.get("/favourites", (req, res) => {
+  res.render("userFavourites");
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+

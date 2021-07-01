@@ -2,24 +2,27 @@
 <html lang="en">
 
 <head>
-  <title>${users.id}'s' listings</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/listingBySeller.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/userFavourites.css" type="text/css" />
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script type="text/javascript" src="/scripts/featureListings.js"></script>
+  <script type="text/javascript" src="/scripts/favouriteListings.js"></script>
+  <script src="https://kit.fontawesome.com/77de315972.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <header>
-    <nav class="navbar navbar-default fixed-top">
-      <div class="navbar-brand col">
-        <a class="navbar-brand col" href="/">Logo</a>
+    <nav id="favourite-nav" class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
+      <div class="navbar-brand col" style="
+      padding-left: 0px;">
+        <a class="logo-image" href="/">
+          <img src="images/logo.png" class="img-rounded" />
+        </a>
       </div>
 
       <div class="nav-item nav-link col" id="links">
@@ -34,17 +37,22 @@
             <li><a href="#">Bottom Wear</a></li>
           </ul>
         </div>
-        <a href=""> MyListings</a>
+<<<<<<< HEAD
+        <a href=""> MyFavourites</a>
+=======
+        <a href="/" id="fave"> Back to Home</a>
+>>>>>>> refs/remotes/origin/dev
 
       </div>
       <div class="col" id="avatar">
-        <a href=""> <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg" class="imp-responsive img-rounded  .img-fluid. " style="max-width: 7rem; max-height: 7rem;"alt=""></a>
+        <a href=""> AVATAR </a>
       </div>
 
     </nav>
   </header>
 
   <main>
+
     <div class='container-fluid'>
       <div class='row'>
 
@@ -52,28 +60,27 @@
             <div class="profile-sidebar">
               <!-- SIDEBAR USERPIC -->
               <div class="userpic">
-                <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg" class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 150px; max-height: 150px;"alt="">
+                <img id="userAvatar" class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 150px; max-height: 150px;"alt="">
               </div>
               <!-- END SIDEBAR USERPIC -->
               <!-- SIDEBAR USER TITLE -->
               <div class="profile-usertitle">
-                <div class="profile-usertitle-name">
-                  Senay Hailu
-                </div>
+                <p class="profile-usertitle-name">
+
+                </p>
               </div>
-              <div>
-                Seller
-              </div>
+
+
+
               <!-- END SIDEBAR USER TITLE -->
               <!-- SIDEBAR BUTTONS -->
-              <div class="profile-userbuttons">
-                <button type="button" class="btn btn-danger btn-sm">Message</button>
+              <div class="profile-userbuttons" >
+
+                <button class="btn btn-primary">
+                  <a id="email" style="color: white;">Message me!</a>
+                </button>
               </div>
-              <div>
-                <a href="/users/:user_id/listings">
-                  Seller's Listings
-                </a>
-              </div>
+
           </nav>
 
         <div class="col-xs-6 col-md-6 col-lg-9 thumb" id='gallery'>

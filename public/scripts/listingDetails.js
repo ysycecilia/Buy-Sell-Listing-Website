@@ -2,42 +2,41 @@ $(document).ready(function() {
   console.log('This is listings');
   //Function creates listing element
   const createListingElement = function(listing) {
-    const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
+    const $listing = $(`<div class="card ml-1 mr-1" id='each-listing'>
     <i class="far fa-heart" data-listing="${listing.id}"
     data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
 
-    <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
+    <img src='../public/images/logo.png' class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
         <h5 class="card-title">${listing.title}</h5>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="#" class="btn btn-primary">View Listing</a>
-    </div>
-</div>`);
+    </div>`);
     return $listing;
   };
 
   //Function renders all listings
-  const renderListings = function(listings) {
+  const renderListings = function(listing) {
     const $gallery = $('#gallery');
-    $gallery.empty();
-
-    for (const listing of listings) {
-      
-      $gallery.prepend(createListingElement(listing));
-    }
+   $gallery.empty();
+  $gallery.prepend(createListingElement(listing));
   };
 
   const loadListings = function(url) {
+    // console.log(listings);
     return $.get({
       url: url,
       method: 'GET',
       dataType: 'json'
     })
-      .then(function(listings) {
-        // $('#avatar').append(`<a> ${res.session(user_id)}</a>`);
+      .then(function(listing) {
+        // console.log('This is senay +++', listing)
+        $("#listing-header").empty().append(`<h4>${listing.title}'s details</h4>`);
+        // $("#member").empty().append(`<span> Member since ${users.member_since}</span>`);
 
-        renderListings(listings); // -> undefined
+
+
+        renderListings(listing); // -> undefined
 
         //Notice: -----------------------------
         //please keep the whole favourite part sits inside loadLising.then()
@@ -95,9 +94,5 @@ $(document).ready(function() {
     const data = $(this).serialize();
     loadListings(`/home/search?${data}`)
   });
-
- 
-
-
-  loadListings('/home');
-});
+  loadListings(`/home/listing/:id`);
+})

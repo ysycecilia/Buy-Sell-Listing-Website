@@ -4,13 +4,21 @@ body {
   background-color: rgb(231, 226, 226);
 
   nav {
-    height: 100px;
+    height: 150px;
     padding: 5px;
     box-shadow: 5px 4px 5px #000;
 
     #avatar {
       display: flex;
       justify-content: flex-end;
+    }
+
+    .img-rounded{
+      width: 225px;
+      height: 100px;
+      /* border-radius: 50%; */
+      overflow: hidden;
+      /* margin-top: -6px; */
     }
 
     #links {
@@ -21,9 +29,6 @@ body {
 
   .container-fluid {
     height: 100%;
-
-
-
   }
 
   main {
@@ -37,7 +42,15 @@ body {
   #gallery {
      display: flex;
      flex-flow: row wrap;
-  }
+     padding: 30px
+
+    }
+    .card {
+     height: 600px;
+     div {
+      size: 2.5rem;
+     }
+    }
 
   #sidebar {
     display: flex;
@@ -46,7 +59,7 @@ body {
     padding-top: 30px;
     padding-bottom: 30px;
     font-size: 1.2em;
-    min-height: 600px;
+    min-height: 90vh;
     background-color:rgb(251, 237, 237);
 
     div {
@@ -59,6 +72,10 @@ body {
 
   h1 {
     color: #244751;
+  }
+
+  .row {
+    padding-top: 5%;
   }
 }
 
@@ -76,4 +93,5 @@ body {
   max-width: 7rem;
   max-height: 7rem;
 }
+
 

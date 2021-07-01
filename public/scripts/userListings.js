@@ -1,10 +1,10 @@
 $(document).ready(function() {
   console.log('This is listings');
-  //Function creates listing element
+  //create listings for a particular user
   const createListingElement = function(listing) {
+    console.log(listing)
     const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
-    <i class="far fa-heart" data-listing="${listing.id}"
-    data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
+
 
     <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
@@ -12,6 +12,10 @@ $(document).ready(function() {
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
         <a href="#" class="btn btn-primary">View Listing</a>
+        <button class="btn btn-secondary sold" data-listingid="${listing.id}">Mark As Sold</button>
+        <form method="POST" action="/home/listings/${listing.id}/delete">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     </div>
 </div>`);
     return $listing;
@@ -23,9 +27,9 @@ $(document).ready(function() {
     $gallery.empty();
 
     for (const listing of listings) {
-      
       $gallery.prepend(createListingElement(listing));
     }
+
   };
 
   const loadListings = function(url) {
@@ -35,10 +39,21 @@ $(document).ready(function() {
       dataType: 'json'
     })
       .then(function(listings) {
-        // $('#avatar').append(`<a> ${res.session(user_id)}</a>`);
-
+        console.log(listings)
         renderListings(listings); // -> undefined
 
+        //mark as sold - this has to be inside loadlisting to work
+        const $sold = $('.sold')
+       
+        $sold.click(function(e){
+          e.preventDefault();
+          $(e.target).html("Sold");
+          $.post(`/home/listings/${e.target.dataset.listingid}/sold`)
+              .then((data) => {
+                console.log('sold : ', data);
+              });
+        });
+        
         //Notice: -----------------------------
         //please keep the whole favourite part sits inside loadLising.then()
         //it need the loaded elements to be liked or it won't work
@@ -87,7 +102,14 @@ $(document).ready(function() {
         });
       })
   }
-
+  // const loadListings = (listings) => {
+  //   // fetch the listings
+  //   $.get('/home')
+  //     .then((listings) => {
+  //       // console.log(listings);
+  //       renderListings(listings);
+  //     });
+  // };
   const $search = $('#search-item-form')
   $search.submit(function(event) {
     event.preventDefault();
@@ -96,8 +118,12 @@ $(document).ready(function() {
     loadListings(`/home/search?${data}`)
   });
 
- 
+  
+  
 
+  
 
-  loadListings('/home');
+  loadListings('/home/users/listings')
+
+  //loadListings('/home');
 });
