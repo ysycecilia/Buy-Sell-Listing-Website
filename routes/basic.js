@@ -39,16 +39,16 @@ module.exports = (db) => {
   router.get("/listings/:id", (req, res) => {
 
     db.query(`SELECT id, title, price, description, user_id FROM listings WHERE id =$1;`, [req.params.id])
-    .then(data => {
-      const item = data.rows[0];
-      res.json(item);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
+      .then(data => {
+        const item = data.rows[0];
+        res.json(item);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
 
 
   router.get("/users/listings", (req, res) => {
@@ -83,7 +83,7 @@ module.exports = (db) => {
   });
 
   router.post("/listings", (req, res) => {
-    console.log("This is request", req.body)
+    console.log("This is request", req.body);
     const title = req.body.title;
     const description = req.body.description;
     const price = req.body.price;
@@ -108,7 +108,7 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
-      // res.json({name: 'Senay'})
+    // res.json({name: 'Senay'})
 
   });
 
@@ -185,7 +185,7 @@ module.exports = (db) => {
   router.post("/listings/:id/delete", (req, res) => {
     const userId = req.session.user_id;
     const listing_id = parseInt(req.params.id);
-    console.log(req.body)
+    console.log(req.body);
     // const listing_id = 5;
     db.query(`DELETE FROM listings WHERE id = $1`, [listing_id])
       .then(

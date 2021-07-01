@@ -2,9 +2,9 @@ $(document).ready(function() {
   console.log('This is listings');
   //create listings for a particular user
   const createListingElement = function(listing) {
-    console.log(listing)
+    console.log(listing);
     const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
-    
+
 
     <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
@@ -38,7 +38,7 @@ $(document).ready(function() {
       dataType: 'json'
     })
       .then(function(listings) {
-        console.log(listings)
+        console.log(listings);
         renderListings(listings); // -> undefined
 
         //Notice: -----------------------------
@@ -87,8 +87,8 @@ $(document).ready(function() {
               });
           }
         });
-      })
-  }
+      });
+  };
   // const loadListings = (listings) => {
   //   // fetch the listings
   //   $.get('/home')
@@ -97,15 +97,15 @@ $(document).ready(function() {
   //       renderListings(listings);
   //     });
   // };
-  const $search = $('#search-item-form')
+  const $search = $('#search-item-form');
   $search.submit(function(event) {
     event.preventDefault();
 
     const data = $(this).serialize();
-    loadListings(`/home/search?${data}`)
+    loadListings(`/home/search?${data}`);
   });
 
-  loadListings('/home/users/listings')
+  loadListings('/home/users/listings');
 
   //loadListings('/home');
 });
