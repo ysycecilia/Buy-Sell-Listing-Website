@@ -5,20 +5,12 @@ $(document).ready(function() {
     event.preventDefault();
     //Change data to queryformat
     const data = ($(this).serialize());
-
-    // //Validation against empty data or overlimit character usage
-    // const userInput = $(this).children('.tweet-text').val();
-    // //If validation failed, return false and exit form
-    // if (!validator(userInput)) {
-    //   return false;
-    // }
-   // post request for the new tweet
    $.ajax({
-    url: 'home/listings',
+    url: `home/listings/${req.params.id}`,
     method: 'POST',
     data: data
   }).done(function(data) {
-    // because dataType is json 'data' is guaranteed to be an object
+
 
     console.log(data);
     $('form')[0].reset();

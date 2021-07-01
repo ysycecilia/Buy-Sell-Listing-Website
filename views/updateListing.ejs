@@ -17,7 +17,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script type="text/javascript" src="/scripts/createListing.js"></script>
+  <script type="text/javascript" src="/scripts/updateListing.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/4.5.0/lib/js/emojione.min.js"
     integrity="sha512-E2Ai/A9+KcoBm0lvfnd5krbr7TWUigQGWTfcoMToNpfmCvQKkZdTbpwyIM4PFbCGMtSmMjE/DAXGjVXpWGdFaQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -37,16 +37,6 @@
 
       <div class="nav-item nav-link col" id="links">
 
-        <a href=""> Search </a>
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Men</a></li>
-            <li><a href="#">Women</a></li>
-            <li><a href="#">Top Wear</a></li>
-            <li><a href="#">Bottom Wear</a></li>
-          </ul>
-        </div>
         <a href=""> MyListings</a>
 
       </div>
@@ -68,14 +58,14 @@
 
 
           <form id="listing-form">
-            <label><h4>CREATE NEW LISTING</h4></label>
+            <label><h4>UPDATE LISTING</h4></label>
             <div class="form-group">
               <label for="Title">Title</label>
               <input class="form-control" id="Title" name="title" aria-describedby="emailHelp" placeholder="Title">
             </div>
             <div class="form-group">
               <label for="listingDescription">Description</label>
-              <textarea class="form-control" id="Description" name="description" placeholder="Description"></textarea>
+              <input class="form-control" id="Description" name="description" placeholder="Description">
             </div>
 
             <div class="form-group">
@@ -94,18 +84,14 @@
               <label for="exampleFormControlSelect1">Category</label>
               <select class="form-control" id="categorySelect" name="category_id">
                 <option value='1'>Fiction</option>
-                <option value='2'>Non-fiction</option>
-                <option value='3'>Sci-fi</option>
-                <option value='4'>Romance</option>
-                <option value='5'>Economics</option>
-                <option value='5'>History</option>
-                <option value='5'>Self-Help</option>
-                <option value='5'>Tech</option>
-                <option value='5'>Religion</option>
+                <option>Non-fiction</option>
+                <option>Sci-fi</option>
+                <option>Romance</option>
+                <option>Finance</option>
               </select>
             </div>
 
-          <button type="submit" class="btn btn-primary">Create Listing</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
 

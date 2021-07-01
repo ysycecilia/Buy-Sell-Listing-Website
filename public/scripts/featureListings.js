@@ -26,7 +26,6 @@ $(document).ready(function() {
       
       $gallery.prepend(createListingElement(listing));
     }
-
   };
 
   const loadListings = function(url) {
@@ -36,6 +35,8 @@ $(document).ready(function() {
       dataType: 'json'
     })
       .then(function(listings) {
+        // $('#avatar').append(`<a> ${res.session(user_id)}</a>`);
+
         renderListings(listings); // -> undefined
 
         //Notice: -----------------------------
@@ -86,14 +87,7 @@ $(document).ready(function() {
         });
       })
   }
-  // const loadListings = (listings) => {
-  //   // fetch the listings
-  //   $.get('/home')
-  //     .then((listings) => {
-  //       // console.log(listings);
-  //       renderListings(listings);
-  //     });
-  // };
+
   const $search = $('#search-item-form')
   $search.submit(function(event) {
     event.preventDefault();
