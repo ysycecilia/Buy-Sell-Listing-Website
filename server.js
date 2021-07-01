@@ -62,6 +62,9 @@ app.get("/search", (req, res) => {
   res.render("filter");
 });
 
+app.get("/favourites", (req, res) => {
+  res.render("userFavourites");
+});
 
 
 app.listen(PORT, () => {

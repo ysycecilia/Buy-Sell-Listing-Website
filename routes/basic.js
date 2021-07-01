@@ -83,39 +83,6 @@ module.exports = (db) => {
       });
   });
 
-  // Get all listings favourited by a user
-  router.get("/users/:user_id/favourites", (req, res) => {
-
-    console.log(req.params);
-    db.query(`SELECT listings.*, users.* FROM users JOIN favourites ON user_id = users.id JOIN listings ON listings.id = listing_id where users.id = ${req.params.user_id}`)
-
-      .then(data => {
-
-        res.json(data.rows);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-  router.post("/users/:user_id/favourites", (req, res) => {
-    db.query(`INSERT INTO favourites(listing_id, user_id)
-    VALUES($1, $2)`, [req.body.listing_id, req.params.user_id])
-      .then(data => {
-        const favourites = data.rows;
-        console.log(favourites);
-        res.json(favourites);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-
   router.post("/listings", (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
@@ -227,15 +194,20 @@ module.exports = (db) => {
       });
   });
 
-  //favourite icon: display all fav
-  router.get("/users/:user_id/favourites", (req, res) => {
-    const queryString = `SELECT * FROM favourites
-    JOIN listings ON listing_id = listings.id
-    WHERE favourites.id IN (SELECT favourites.id FROM favourites);`;
-    db.query(queryString)
+  //favourite icon: display all listings liked by a
+  router.get(`/users/:userId/favourites`, (req, res) => {
+
+    db.query(`SELECT listings.*, listings.id as listing_id, users.* , users.id as creator_id from listings
+    JOIN favourites ON favourites.listing_id = listings.id
+    JOIN users ON favourites.user_id = users.id
+    where favourites.user_id = $1;`,[req.session.user_id])
       .then(data => {
-        const favourites = data.rows;
-        res.json({ favourites });
+        // let templateVars = {
+        //   user_id: req.session.user_id,
+        //   email: users[req.session.user_id].email
+        // };
+        res.json(data.rows);
+        // res.render("userFavourites", templateVar);
       })
       .catch(err => {
         res
@@ -248,7 +220,7 @@ module.exports = (db) => {
   router.post("/users/:user_id/favourites", (req, res) => {
     //const listing_id = parseInt(req.params.id);
     // const user_id = req.session.userId;
-    const user_id = req.body.user_id;
+    const user_id = req.session.user_id;
     const listing_id = req.body.listing_id;
 
     db.query(`
@@ -269,7 +241,7 @@ module.exports = (db) => {
   //favourite icon: unsave a fav record
   router.post(`/users/:user_id/favourites/delete`, (req, res) => {
     //const listing_id = parseInt(req.params.id);
-    const user_id = req.params.user_id;
+    const user_id = req.session.user_id;
     const listing_id = req.body.listing_id;
 
     db.query(`DELETE FROM favourites WHERE listing_id = $1

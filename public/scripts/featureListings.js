@@ -83,8 +83,8 @@ $(document).ready(function() {
               });
           }
         });
-      })
-  }
+      });
+  };
   // const loadListings = (listings) => {
   //   // fetch the listings
   //   $.get('/home')
@@ -93,7 +93,7 @@ $(document).ready(function() {
   //       renderListings(listings);
   //     });
   // };
-  const $search = $('#search-item-form')
+  const $search = $('#search-item-form');
   $search.submit(function(event) {
     event.preventDefault();
 

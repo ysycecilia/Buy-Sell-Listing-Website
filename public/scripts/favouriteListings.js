@@ -3,8 +3,8 @@ $(document).ready(function() {
   //Function creates listing element
   const createListingElement = function(listing) {
     const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
-    <i class="far fa-heart" data-listing="${listing.id}"
-    data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
+    <i class="far fa-heart" data-listing="${listing.listing_id}"
+    data-user="${listing.userid}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Cancel Favourite</i>
 
     <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
@@ -18,6 +18,7 @@ $(document).ready(function() {
   };
 
 
+
   //Function renders all listings
   const renderListings = function(listings) {
     const $gallery = $('#gallery');
@@ -26,6 +27,16 @@ $(document).ready(function() {
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
     }
+
+    const emailTO = listings[0].email;
+
+    $('#email').attr("href", `mailto:${emailTO}?subject=Inquire for you listing on Lightmazon!`);
+
+    const userName = listings[0].name;
+    $('.profile-usertitle-name').text(`${userName}`);
+
+    const userPic = listings[0].avatar_url;
+    $('#userAvatar').attr("src", `${userPic}`);
 
   };
 
@@ -39,9 +50,38 @@ $(document).ready(function() {
         renderListings(listings); // -> undefined
 
         const $favListing = $('.fa-heart');
+        $favListing.addClass("far fa-heart").css("color", "red");
         $favListing.click(function(e) {
 
           if ($(e.target).data("id") === "far-fa-heart") {
+            e.preventDefault();
+
+            $(e.target).removeClass("fas fa-heart").css("color", "black");
+            $(e.target).data('id', "far-fa-heart");
+
+            let user_id = $(this).attr('data-user');
+
+            $.post(`/home/users/${user_id}/favourites/delete`,
+              {listing_id: $(this).attr('data-listing')
+              })
+              .then((data) => {
+                console.log('fav deleted : ', data);
+              });
+
+          } else {
+            // e.preventDefault();
+
+            // $(e.target).removeClass("fas fa-heart").addClass("far fa-heart");
+            // $(e.target).data('id', "far-fa-heart");
+
+            // let user_id = $(this).attr('data-user');
+
+            // $.post(`/home/users/${user_id}/favourites/delete`,
+            //   {listing_id: $(this).attr('data-listing')
+            //   })
+            //   .then((data) => {
+            //     console.log('fav deleted : ', data);
+            //   });
             e.preventDefault();
 
             $(e.target).removeClass("far fa-heart").addClass("fas fa-heart").css("color", "red");
@@ -64,26 +104,11 @@ $(document).ready(function() {
 
                 console.log('fav saved : ', data);
               });
-          } else {
-            e.preventDefault();
-
-            $(e.target).removeClass("fas fa-heart").addClass("far fa-heart");
-            $(e.target).data('id', "far-fa-heart");
-
-            let user_id = $(this).attr('data-user');
-
-            $.post(`/home/users/${user_id}/favourites/delete`,
-              {listing_id: $(this).attr('data-listing')
-              })
-              .then((data) => {
-                console.log('fav deleted : ', data);
-              });
           }
         });
       }
       );
   };
 
-
-  loadListings('/home');
+  loadListings('/home/users/:user_id/favourites');
 });
