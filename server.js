@@ -35,6 +35,8 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+app.use('/views', express.static(__dirname + '/views'));
+// app.use(express.static(__dirname + './views'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -60,9 +62,18 @@ app.get("/seller", (req, res) => {
 });
 app.get("/newListing", (req, res) => {
   res.render("createNewListing");
+
 });
-app.get("/listingDetails/:id", (req, res) => {
+app.get("/updateListing", (req, res) => {
+  res.render("updateListing");
+
+});
+app.get("/listingDetails", (req, res) => {
   res.render("listingDetails");
+});
+app.get("/userListings", (req, res) => {
+  res.render("userListings");
+
 });
 app.get("/search", (req, res) => {
   res.render("home");

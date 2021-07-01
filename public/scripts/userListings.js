@@ -11,7 +11,7 @@ $(document).ready(function() {
         <h5 class="card-title">${listing.title}</h5>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="#" class="btn btn-primary">View Listing</a>
+        <a href="/listingDetails" class="btn btn-primary">View Listing</a>
         <form method="POST" action="/home/listings/${listing.id}/delete">
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
@@ -28,6 +28,15 @@ $(document).ready(function() {
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
     }
+
+    const emailTO = listings[0].email;
+    $('#email').attr("href", `mailto:${emailTO}?subject=Inquire for you listing on Lightmazon!`);
+
+    const userPic = listings[0].avatar_url;
+    $('#userAvatar').attr("src", `${userPic}`);
+
+    const userName = listings[0].name;
+    $('.profile-usertitle-name').text(`${userName}`);
 
   };
 

@@ -1,4 +1,5 @@
 const express = require('express');
+const { TRUE, render } = require('node-sass');
 const router  = express.Router();
 
 
@@ -27,6 +28,7 @@ module.exports = (db) => {
       .then(data => {
         // const templateVars = { data: data.rows};
         // console.log(templateVars)
+
         res.json(data.rows);
       })
       .catch(err => {
@@ -38,10 +40,13 @@ module.exports = (db) => {
 
   router.get("/listings/:id", (req, res) => {
 
-    db.query(`SELECT id, title, price, description, user_id FROM listings WHERE id =$1;`, [req.params.id])
+    db.query(`select * from listings JOIN users ON user_id = users.id WHERE listings.id =$1;`, [req.params.id])
       .then(data => {
         const item = data.rows[0];
-        res.json(item);
+
+        // req.session.listingDetails = item;
+        // res.json(item);
+        res.render('listingDetails', item);
       })
       .catch(err => {
         res
@@ -53,7 +58,7 @@ module.exports = (db) => {
 
   router.get("/users/listings", (req, res) => {
 
-    db.query(`SELECT title, price, description FROM listings
+    db.query(`SELECT * FROM listings
     JOIN users ON user_id = users.id
     WHERE user_id =$1 ;`, [req.session.user_id])
       .then(data => {
@@ -83,17 +88,16 @@ module.exports = (db) => {
   });
 
   router.post("/listings", (req, res) => {
-    console.log("This is request", req.body);
+    //console.log("This is request", req.body)
     const title = req.body.title;
     const description = req.body.description;
     const price = req.body.price;
     const quantity = req.body.quantity;
     const category_id = req.body.category_id;
-    const status = req.body.status;
+    const status = TRUE;
     const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const cover_picture_url = req.body.cover_picture_url;
-    // const user_id = req.session.userId;
-    const user_id = 1;
+    const user_id = req.session.user_id;
     db.query(`
       INSERT INTO listings (title, description, user_id, price, quantity, category_id, status, created_at, cover_picture_url)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -101,6 +105,7 @@ module.exports = (db) => {
       .then(data => {
         const listing = data.rows;
         res.json({listing});
+        // res.redirect('/');
       })
       .catch(err => {
         console.error(err);
@@ -108,7 +113,6 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
-    // res.json({name: 'Senay'})
 
   });
 

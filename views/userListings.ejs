@@ -8,10 +8,12 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/listingBySeller.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/userFavourites.css" type="text/css" />
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script type="text/javascript" src="/scripts/userListings.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/4.5.0/lib/js/emojione.min.js" integrity="sha512-E2Ai/A9+KcoBm0lvfnd5krbr7TWUigQGWTfcoMToNpfmCvQKkZdTbpwyIM4PFbCGMtSmMjE/DAXGjVXpWGdFaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript" src="/scripts/userListings.js"></script>
@@ -19,30 +21,21 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-default fixed-top">
-      <div class="navbar-brand col">
-        <a class="navbar-brand col" href="/">Logo</a>
+    <nav id="favourite-nav" class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
+      <div class="navbar-brand col" style="
+      padding-left: 0px;">
+        <a class="logo-image" href="/">
+          <img src="images/logo.png" class="img-rounded" />
+        </a>
       </div>
 
       <div class="nav-item nav-link col" id="links">
 
-        <a href=""> Search </a>
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Men</a></li>
-            <li><a href="#">Women</a></li>
-            <li><a href="#">Top Wear</a></li>
-            <li><a href="#">Bottom Wear</a></li>
-          </ul>
-        </div>
-        <a href=""> MyListings</a>
+        <a href="/"> Search </a>
+        <a href="/favourites"> MyFavourites</a>
 
+        <p>Welcome!  <a class="profile-usertitle-name"> </a></p>
       </div>
-      <div class="col" id="avatar">
-        <a href=""> <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg" class="imp-responsive img-rounded  .img-fluid. " style="max-width: 7rem; max-height: 7rem;"alt=""></a>
-      </div>
-
     </nav>
   </header>
 
@@ -54,22 +47,23 @@
             <div class="profile-sidebar">
               <!-- SIDEBAR USERPIC -->
               <div class="userpic">
-                <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg" class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 150px; max-height: 150px;"alt="">
+                <img id="userAvatar" class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 150px; max-height: 150px;"alt="">
               </div>
               <!-- END SIDEBAR USERPIC -->
               <!-- SIDEBAR USER TITLE -->
               <div class="profile-usertitle">
-                <div class="profile-usertitle-name">
-                  Senay Hailu
-                </div>
-              </div>
-              <div>
-                Seller
+                <p class="profile-usertitle-name">
+
+                </p>
               </div>
               <!-- END SIDEBAR USER TITLE -->
               <!-- SIDEBAR BUTTONS -->
               <div class="profile-userbuttons">
-                <button type="button" class="btn btn-danger btn-sm">Message</button>
+                <a href="/newListing">
+                <button class="btn btn-danger btn-sm">
+                  New listing
+                </button>
+              </a>
               </div>
               <div>
                 <a href="/users/:user_id/listings">

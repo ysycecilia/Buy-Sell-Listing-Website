@@ -23,7 +23,7 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
+    <nav id="favourite-nav" class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
 
       <div class="navbar-brand col" style="
       padding-left: 0px;">
@@ -35,7 +35,7 @@
       <div class="nav-item nav-link col" id="links">
 
         <a href=""> Search </a>
-        <div class="dropdown">
+          <!-- <div class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="#">Men</a></li>
@@ -43,12 +43,12 @@
             <li><a href="#">Top Wear</a></li>
             <li><a href="#">Bottom Wear</a></li>
           </ul>
-        </div>
+        </div> -->
         <a href="/mylistings"> MyListings</a>
         <a href="/favourites"> MyFavourites</a>
       </div>
       <div class="col" id="avatar">
-        <a href=""> AVATAR </a>
+
       </div>
 
     </nav>
@@ -59,13 +59,13 @@
       <div class='row'>
         <div class="col-xs-6 col-md-6 col-lg-3 wrapper" >
           <nav id='sidebar'>
-          <div class="input-group">
+           <div class="input-group">
             <div class="form-outline">
               <label for="search-listing-form">Searching for anyting...</label>
               <input type="search" id="form1" class="form-control" />
             </div>
 
-            <button type="button" class="btn btn-primary" style="margin:5px;">
+            <button type="submit" class="btn btn-primary" style="margin:5px; width: 80px;">
             Search
           </button>
         </div>
@@ -97,9 +97,6 @@
     </div>
 
   </div>
-
-
-
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

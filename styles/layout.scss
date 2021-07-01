@@ -26,11 +26,32 @@ body {
       justify-content: space-between;
     }
   }
-
+  input {
+    width: 195px;
+    padding: .375rem .75rem;
+    border-width: 1px;
+    border-color:white;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
   .container-fluid {
     height: 100%;
   }
 
+  .fix-top {
+
+  }
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
   main {
     display: flex;
   flex-direction: row;
@@ -52,7 +73,7 @@ body {
     padding-top: 30px;
     padding-bottom: 30px;
     font-size: 1.2em;
-    min-height: 600px;
+    min-height: 90vh;
     background-color:rgb(251, 237, 237);
 
     div {
@@ -82,4 +103,5 @@ body {
   max-width: 7rem;
   max-height: 7rem;
 }
+
 
