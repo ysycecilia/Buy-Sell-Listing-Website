@@ -8,7 +8,7 @@ CREATE TABLE listings (
   price INTEGER NOT NULL DEFAULT 0,
   quantity INTEGER,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-  status VARCHAR(255) CHECK (status IN ('avaliable', 'pending', 'sold')),
+  status BOOLEAN DEFAULT True,
   created_at DATE,
   cover_picture_url VARCHAR(255) NOT NULL
 );

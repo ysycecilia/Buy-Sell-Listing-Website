@@ -1,7 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
   console.log('This is listings');
+  //How do we get userId for the link to MyListings
   //Function creates listing element
-  const createListingElement = function(listing) {
+  const createListingElement = function (listing) {
     const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
     <i class="far fa-heart" data-listing="${listing.id}"
     data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
@@ -18,7 +19,7 @@ $(document).ready(function() {
   };
 
   //Function renders all listings
-  const renderListings = function(listings) {
+  const renderListings = function (listings) {
     const $gallery = $('#gallery');
     $gallery.empty();
 
@@ -29,16 +30,14 @@ $(document).ready(function() {
 
   };
 
-  const loadListings = function(url) {
+  const loadListings = function () {
     // console.log(listings);
     return $.get({
-      url: url,
+      url: `home/users/${res.session.user_id}/listings`,
       method: 'GET',
       dataType: 'json'
     })
-      .then(function(listings) {
-        // $('#avatar').append(`<a> ${res.session(user_id)}</a>`);
-
+      .then(function (listings) {
         renderListings(listings); // -> undefined
 
         //Notice: -----------------------------
@@ -46,7 +45,7 @@ $(document).ready(function() {
         //it need the loaded elements to be liked or it won't work
 
         const $favListing = $('.fa-heart');
-        $favListing.click(function(e) {
+        $favListing.click(function (e) {
 
           if ($(e.target).data("id") === "far-fa-heart") {
             e.preventDefault();
@@ -64,7 +63,8 @@ $(document).ready(function() {
             let user_id = $(this).attr('data-user');
 
             $.post(`/home/users/${user_id}/favourites`,
-              {listing_id: $(this).attr('data-listing'),
+              {
+                listing_id: $(this).attr('data-listing'),
                 user_id: $(this).attr('data-user')
               })
               .then((data) => {
@@ -80,7 +80,8 @@ $(document).ready(function() {
             let user_id = $(this).attr('data-user');
 
             $.post(`/home/users/${user_id}/favourites/delete`,
-              {listing_id: $(this).attr('data-listing')
+              {
+                listing_id: $(this).attr('data-listing')
               })
               .then((data) => {
                 console.log('fav deleted : ', data);
@@ -89,15 +90,13 @@ $(document).ready(function() {
         });
       })
   }
-
+  //Search function
   const $search = $('#search-item-form')
-  $search.submit(function(event) {
+  $search.submit(function (event) {
     event.preventDefault();
 
     const data = $(this).serialize();
     loadListings(`/home/search?${data}`)
   });
-
-
   loadListings('/home');
 })

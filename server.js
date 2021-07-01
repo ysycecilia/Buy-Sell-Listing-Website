@@ -60,15 +60,22 @@ app.get("/seller", (req, res) => {
 });
 app.get("/newListing", (req, res) => {
   res.render("createNewListing");
+
 });
-app.get("/listingDetails/:id", (req, res) => {
+app.get("/updateListing", (req, res) => {
+  res.render("updateListing");
+
+});
+app.get("/listingDetails", (req, res) => {
   res.render("listingDetails");
+});
+app.get("/userListings", (req, res) => {
+  res.render("userListings");
+
 });
 app.get("/search", (req, res) => {
   res.render("filter");
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

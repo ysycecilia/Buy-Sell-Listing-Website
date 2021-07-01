@@ -6,7 +6,7 @@ $(document).ready(function() {
     //Change data to queryformat
     const data = ($(this).serialize());
 
-    console.log('This is it ++++', data);
+    // console.log('This is it ++++', data);
     // //Validation against empty data or overlimit character usage
     // const userInput = $(this).children('.tweet-text').val();
     // //If validation failed, return false and exit form

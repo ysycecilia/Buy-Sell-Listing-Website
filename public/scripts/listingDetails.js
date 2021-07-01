@@ -18,15 +18,10 @@ $(document).ready(function() {
   };
 
   //Function renders all listings
-  const renderListings = function(listings) {
+  const renderListings = function(listing) {
     const $gallery = $('#gallery');
     $gallery.empty();
-
-    for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
-
-    }
-
   };
 
   const loadListings = function(url) {
@@ -36,10 +31,14 @@ $(document).ready(function() {
       method: 'GET',
       dataType: 'json'
     })
-      .then(function(listings) {
-        // $('#avatar').append(`<a> ${res.session(user_id)}</a>`);
+      .then(function(listing) {
+        // console.log('This is senay +++', listing)
+        $("#listing-header").empty().append(`<h4>${listing.title}'s details</h4>`);
+        // $("#member").empty().append(`<span> Member since ${users.member_since}</span>`);
 
-        renderListings(listings); // -> undefined
+
+
+        renderListings(listing); // -> undefined
 
         //Notice: -----------------------------
         //please keep the whole favourite part sits inside loadLising.then()
@@ -97,7 +96,5 @@ $(document).ready(function() {
     const data = $(this).serialize();
     loadListings(`/home/search?${data}`)
   });
-
-
-  loadListings('/home');
+  loadListings(`/home`);
 })

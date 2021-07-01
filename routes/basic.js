@@ -27,6 +27,7 @@ module.exports = (db) => {
       .then(data => {
         // const templateVars = { data: data.rows};
         // console.log(templateVars)
+
         res.json(data.rows);
       })
       .catch(err => {
@@ -117,7 +118,7 @@ module.exports = (db) => {
 
 
   router.post("/listings", (req, res) => {
-    console.log("This is request", req.body)
+    //console.log("This is request", req.body)
     const title = req.body.title;
     const description = req.body.description;
     const price = req.body.price;
@@ -135,6 +136,7 @@ module.exports = (db) => {
       .then(data => {
         const listing = data.rows;
         res.json({listing});
+        res.redirect('/')
       })
       .catch(err => {
         console.error(err);
