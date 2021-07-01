@@ -24,9 +24,7 @@ $(document).ready(function() {
 
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
-
     }
-
   };
 
   const loadListings = function(url) {
@@ -98,6 +96,8 @@ $(document).ready(function() {
     loadListings(`/home/search?${data}`)
   });
 
+ loadListings(`/home/users/${user_id}/listings`)
+
 
   loadListings('/home');
-})
+});

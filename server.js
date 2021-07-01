@@ -74,11 +74,19 @@ app.get("/userListings", (req, res) => {
 
 });
 app.get("/search", (req, res) => {
-  res.render("filter");
+  res.render("home");
 });
+app.get("/mylistings", (req, res) => {
+  res.render("userListings");
+});
+
+app.get("/favourites", (req, res) => {
+  res.render("userFavourites");
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
-})
+});
 
 
