@@ -23,7 +23,7 @@ module.exports = (db) => {
     db.query(`SELECT id, title, price, description, user_id FROM listings WHERE id =$1;`, [req.params.id])
       .then(data => {
         const item = data.rows[0];
-        res.render('listings', item);
+        res.render('listingDetails', item);
       })
       .catch(err => {
         res

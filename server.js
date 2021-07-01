@@ -57,9 +57,9 @@ app.get("/seller", (req, res) => {
 app.get("/newListing", (req, res) => {
   res.render("createNewListing");
 });
-app.get("/listingDetails/:id", (req, res) => {
-  res.render("listingDetails");
-});
+// app.get("/listingDetails/:id", (req, res) => {
+//   res.render("listingDetails");
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
