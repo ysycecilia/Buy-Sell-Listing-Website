@@ -41,7 +41,22 @@ module.exports = (db) => {
     db.query(`SELECT id, title, price, description, user_id FROM listings WHERE id =$1;`, [req.params.id])
     .then(data => {
       const item = data.rows[0];
-      res.json(item);
+      res.render('listingDetails', item);
+
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  })
+  //route to get listing update
+  router.get("/listings/update/:id", (req, res) => {
+
+    db.query(`SELECT id, title, price, description, quantity, user_id, cover_picture_url FROM listings WHERE id =$1;`, [req.params.id])
+    .then(data => {
+      const item = data.rows[0];
+      res.render('updateListing', item);
 
     })
     .catch(err => {
@@ -59,7 +74,8 @@ module.exports = (db) => {
     WHERE user_id =$1 ;`, [req.session.user_id])
       .then(data => {
         const item = data.rows[0];
-        res.render('listingDetails', item);
+        //note
+        res.render('userListings', item);
       })
       .catch(err => {
         res
@@ -207,7 +223,7 @@ module.exports = (db) => {
     // const user_id = req.session.userId;
     const user_id = 1;
     //const listing_id = parseInt(req.params.id);
-    const listing_id = 1;
+    const listing_id = req.body.id;
     db.query(`
       UPDATE listings SET
       title = $1, description = $2, user_id = $3, price = $4,
@@ -217,7 +233,9 @@ module.exports = (db) => {
     [title, description, user_id, price, quantity, category_id, status, created_at, cover_picture_url, listing_id])
       .then(data => {
         const listing = data.rows;
-        res.json({listing});
+
+        console.log('This is it +++', data)
+        res.json(listing);
       })
       .catch(err => {
         res

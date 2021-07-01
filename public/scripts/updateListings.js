@@ -5,8 +5,10 @@ $(document).ready(function() {
     event.preventDefault();
     //Change data to queryformat
     const data = ($(this).serialize());
+    const dataArray = ($(this).serializeArray());
+    console.log(data);
    $.ajax({
-    url: `home/listings/${req.params.id}`,
+    url: `/home/listings/${dataArray[0].value}`,
     method: 'POST',
     data: data
   }).done(function(data) {
