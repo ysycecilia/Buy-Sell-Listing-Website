@@ -94,5 +94,5 @@ $(document).ready(function() {
     const data = $(this).serialize();
     loadListings(`/home/search?${data}`)
   });
-  loadListings(`/home`);
+  loadListings(`/home/listing/:id`);
 })

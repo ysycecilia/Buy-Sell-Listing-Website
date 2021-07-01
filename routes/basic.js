@@ -27,7 +27,7 @@ module.exports = (db) => {
       .then(data => {
         res.json(data.rows)
       })
-      
+
       .catch(err => {
         console.log("error", err)
         res
@@ -42,6 +42,7 @@ module.exports = (db) => {
     .then(data => {
       const item = data.rows[0];
       res.json(item);
+
     })
     .catch(err => {
       res
@@ -50,7 +51,7 @@ module.exports = (db) => {
     });
   })
 
-  
+
   router.get("/users/listings", (req, res) => {
 
     db.query(`SELECT listings.* FROM listings
@@ -115,18 +116,18 @@ module.exports = (db) => {
   });
 
   router.post("/listings/:id/sold", (req, res) => {
-    
+
     db.query(`UPDATE listings
     SET status = FALSE
     WHERE user_id =$1 AND listings.id =$2;`,[req.session.user_id, req.params.id])
     .then(data => {
       res.json(data)
     })
-    
+
   })
 
 
-  
+
   router.post("/listings", (req, res) => {
     //console.log("This is request", req.body)
     const title = req.body.title;
@@ -134,10 +135,10 @@ module.exports = (db) => {
     const price = req.body.price;
     const quantity = req.body.quantity;
     const category_id = req.body.category_id;
-  
+
     const created_at = req.body.created_at;
     const cover_picture_url = req.body.cover_picture_url;
-    
+
     // const user_id = req.session.userId;
     const user_id = 1;
     db.query(`
@@ -228,18 +229,18 @@ module.exports = (db) => {
 
   //delete a given listing by id
   router.post("/listings/:id/delete", (req, res) => {
-   
+
     const userId = req.session.user_id;
     const listing_id = parseInt(req.params.id);
-    
+
     // const listing_id = 5;
     db.query(`DELETE FROM listings WHERE id = $1`, [listing_id])
       .then(
         // res.status(200).send(`Listing deleted with ID: ${listing_id}`)
         res.redirect("/")
-        
+
       )
-      
+
       .catch(err => {
         res
           .status(500)
