@@ -39,12 +39,18 @@ body {
   padding-top: 100px;
   }
 
-  // #gallery {
-  //    display: flex;
-  //    flex-flow: row wrap;
-  //    padding: 30px
+  #gallery {
+     display: flex;
+     flex-flow: row wrap;
+     padding: 30px
 
-  // }
+    }
+    .card {
+     height: 600px;
+     div {
+      size: 2.5rem;
+     }
+    }
 
   #sidebar {
     display: flex;
@@ -66,6 +72,10 @@ body {
 
   h1 {
     color: #244751;
+  }
+
+  .row {
+    padding-top: 5%;
   }
 }
 
