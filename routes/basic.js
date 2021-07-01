@@ -51,14 +51,14 @@ module.exports = (db) => {
   })
 
 
-  router.get("/users/:userId/listings", (req, res) => {
+  router.get("/users/listings", (req, res) => {
 
     db.query(`SELECT title, price, description FROM listings
     JOIN users ON user_id = users.id
     WHERE user_id =$1 ;`, [req.session.user_id])
       .then(data => {
         const item = data.rows;
-        res.json({item});
+        res.json(data.rows);
       })
       .catch(err => {
         res
@@ -212,9 +212,11 @@ module.exports = (db) => {
   });
 
   //delete a given listing by id
-  router.delete("/listings/:id/delete", (req, res) => {
-    //const listing_id = parseInt(req.params.id);
-    const listing_id = 5;
+  router.post("/listings/:id/delete", (req, res) => {
+    const userId = req.session.user_id;
+    const listing_id = parseInt(req.params.id);
+    console.log(req.body)
+    // const listing_id = 5;
     db.query(`DELETE FROM listings WHERE id = $1`, [listing_id])
       .then(
         res.status(200).send(`Listing deleted with ID: ${listing_id}`)

@@ -1,10 +1,10 @@
 $(document).ready(function() {
   console.log('This is listings');
-  //Function creates listing element
+  //create listings for a particular user
   const createListingElement = function(listing) {
+    console.log(listing)
     const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
-    <i class="far fa-heart" data-listing="${listing.id}"
-    data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart" style="padding: 10px;"> Add to Favourites</i>
+    
 
     <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
@@ -12,6 +12,9 @@ $(document).ready(function() {
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
         <a href="#" class="btn btn-primary">View Listing</a>
+        <form method="POST" action="/home/listings/${listing.id}/delete">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
     </div>
 </div>`);
     return $listing;
@@ -35,6 +38,7 @@ $(document).ready(function() {
       dataType: 'json'
     })
       .then(function(listings) {
+        console.log(listings)
         renderListings(listings); // -> undefined
 
         //Notice: -----------------------------
@@ -101,8 +105,7 @@ $(document).ready(function() {
     loadListings(`/home/search?${data}`)
   });
 
- loadListings(`/home/users/${user_id}/listings`)
+  loadListings('/home/users/listings')
 
-
-  loadListings('/home');
+  //loadListings('/home');
 });

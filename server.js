@@ -61,6 +61,9 @@ app.get("/seller", (req, res) => {
 app.get("/search", (req, res) => {
   res.render("home");
 });
+app.get("/mylistings", (req, res) => {
+  res.render("userListings");
+});
 
 
 
