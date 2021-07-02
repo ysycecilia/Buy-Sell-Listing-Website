@@ -1,3 +1,5 @@
+//const { json } = require("body-parser");
+
 $(document).ready(function() {
   console.log('This is listings');
   //Function creates listing element
@@ -96,9 +98,6 @@ $(document).ready(function() {
     const data = $(this).serialize();
     loadListings(`/home/search?${data}`)
   });
-
-
-
 
   loadListings('/home');
 });

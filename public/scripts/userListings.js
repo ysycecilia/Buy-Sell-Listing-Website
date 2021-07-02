@@ -14,6 +14,9 @@ $(document).ready(function() {
         <form method="POST" action="/home/listings/${listing.listing_id}/delete">
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
+        <form method="POST" action="/home/listings/update/${listing.listing_id}">
+          <button type="submit" class="btn btn-danger">update</button>
+        </form>
     </div>
 </div>`);
     return $listing;
@@ -22,8 +25,8 @@ $(document).ready(function() {
   //Function renders all listings
   const renderListings = function(listings) {
     const $gallery = $('#gallery');
+    console.log('This is ++++', listings)
     $gallery.empty();
-console.log(listings)
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
     }
@@ -127,5 +130,4 @@ console.log(listings)
 
   loadListings('/home/users/listings');
 
-  //loadListings('/home');
 });

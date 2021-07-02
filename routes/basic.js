@@ -74,8 +74,10 @@ module.exports = (db) => {
     db.query(`SELECT listings.*, listings.id as listing_id, users.*, users.id = user_id FROM listings
     JOIN users ON listings.user_id = users.id
     WHERE user_id =$1;`, [req.session.user_id])
-      .then(data => {
+    .then(data => {
+        //console.log('This is cookie' ,req.session.user_id)
         const item = data.rows;
+        // console.log('This is item' ,item);
         res.json(item);
       })
       .catch(err => {
@@ -118,7 +120,7 @@ module.exports = (db) => {
     const quantity = req.body.quantity;
     const category_id = req.body.category_id;
 
-    const created_at = timeago.format(Date.now());
+    const created_at = req.body.created_at;
     const cover_picture_url = req.body.cover_picture_url;
 
     // const user_id = req.session.userId;
@@ -172,9 +174,6 @@ module.exports = (db) => {
       });
 
   });
-
-
-
 
   //update an existing listing by id
   router.post("/listings/:id", (req, res) => {

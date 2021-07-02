@@ -7,27 +7,15 @@ $(document).ready(function() {
     const data = ($(this).serialize());
     const dataArray = ($(this).serializeArray());
     console.log(data);
-<<<<<<< HEAD
    $.ajax({
     url: `/home/listings/${dataArray[0].value}`,
     method: 'POST',
     data: data
   }).done(function(data) {
     // console.log('This is Senay')
-
+    window.location.href = "/";
     $('form')[0].reset();
   })
-=======
-    $.ajax({
-      url: `/home/listings/${dataArray[0].value}`,
-      method: 'POST',
-      data: data
-    }).done(function(data) {
-      console.log('This is Senay');
-      window.location.assign(`http://localhost:8080/home/listingDetails/${dataArray[0].value}`);
-      $('form')[0].reset();
-    });
->>>>>>> refs/remotes/origin/dev
 
   });
 });

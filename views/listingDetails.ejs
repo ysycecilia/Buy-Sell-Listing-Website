@@ -25,8 +25,11 @@
 </head>
 
 <body>
+
   <header>
+
     <nav class="navbar navbar-default navbar-light bg-light fixed-top">
+
       <div class="navbar-brand col" style="
       padding-left: 0px;">
         <a href="/">
@@ -34,39 +37,30 @@
         </a>
       </div>
 
-      <div class="nav-item nav-link col" id="links">
-<<<<<<< HEAD
-
-
-        <a href=""> Search </a>
-        <a href=""> MyFavourites </a>
-        <a href=""> MyListings</a>
-
+      <div>
+        <a href="/"> Search </a>
+        <a href="/favourites"> MyFavourites</a>
+        <a href="/userListings"> MyListings</a>
       </div>
+
       <div class="col" id="avatar">
         <a href=""> <img src=' <%= avatar_url %>' class="imp-responsive img-rounded  img-fluid"
             class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 7rem; max-height: 7rem;"
             alt="<%= name[0].toUpperCase() %>"></a>
       </div>
 
-=======
-        <a href="/"> Search </a>
-        <a href="/favourites"> MyFavourites</a>
-        <a href="/userListings"> MyListings</a>
-      </div>
-      <!-- <div class="col" id="avatar">
-        <a href=""> <img src=<%= avatar_url %>
-            class="imp-responsive img-rounded  .img-fluid. " style="max-width: 7rem; max-height: 7rem;" alt=""></a>
-      </div> -->
->>>>>>> refs/remotes/origin/dev
     </nav>
+
   </header>
 
   <main>
+
     <div class='container-fluid'>
+
       <div class='row'>
 
         <nav class="col-xs-6 col-md-6 col-lg-3 col-xs-6 col-md-6 col-lg-3" id='sidebar'>
+
           <div class="profile-sidebar">
             <!-- SIDEBAR USERPIC -->
             <div class="userpic">
@@ -80,28 +74,36 @@
             </div>
 
             <div id="member">
-              Member since <br><%= (member_since).toString().substr(0,15) %>
+              Member since <br>
+              <%= (member_since).toString().substr(0,15) %>
             </div>
             <!-- END SIDEBAR USER TITLE -->
             <!-- SIDEBAR BUTTONS -->
             <div class="profile-userbuttons">
+
               <button class="btn btn-primary">
-                <a href="mailto:<%= email %>?subject=Inquire for you listing on Lightmazon!" style="color: white;">Message me!</a>
+                <a href="mailto:<%= email %>?subject=Inquire for you listing on Lightmazon!"
+                  style="color: white;">Message me!</a>
               </button>
-            </div>
 
             </div>
+
+          </div>
+
         </nav>
         <!-- Main container of listing -->
         <div class="col-xs-6 col-md-6 col-lg-9">
           <div id="listing-header">
-            <title id="bookTitle"><h4></h4><%= title %></title>
+            <title id="bookTitle">
+              <h4></h4>
+              <%= title %>
+            </title>
           </div>
 
           <div id='gallery'>
             <div class="card ml-1 mr-1" id="card">
-              <i class="far fa-heart" data-listing="${listing.id}"
-              data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart"> Add to Favourites</i>
+              <i class="far fa-heart" data-listing="${listing.id}" data-user="${listing.user_id}" data-id="far-fa-heart"
+                id="fas-fa-heart"> Add to Favourites</i>
 
               <img src='<%= cover_picture_url %>' class="card-img-top" alt="..." id="listing-image">
               <div class="card-body text-center">

@@ -6,7 +6,6 @@ $(document).ready(function () {
     //Change data to queryformat
     const data = ($(this).serialize());
 
-<<<<<<< HEAD
 
     $.ajax({
       url: 'home/listings',
@@ -20,27 +19,6 @@ $(document).ready(function () {
     })
 
   })
-=======
-    // //Validation against empty data or overlimit character usage
-    // const userInput = $(this).children('.tweet-text').val();
-    // //If validation failed, return false and exit form
-    // if (!validator(userInput)) {
-    //   return false;
-    // }
-    // post request for the new tweet
-    $.ajax({
-      url: 'home/listings',
-      method: 'POST',
-      data: data
-    }).done(function(data) {
-    // because dataType is json 'data' is guaranteed to be an object
-
-      console.log(data);
-      $('form')[0].reset();
-    });
-
-  });
->>>>>>> refs/remotes/origin/dev
 });
 
 // //Validation against empty data or overlimit character usage
