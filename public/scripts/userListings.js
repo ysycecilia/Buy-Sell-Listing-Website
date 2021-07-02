@@ -15,9 +15,6 @@ $(document).ready(function() {
         <form method="POST" action="/home/listings/${listing.listing_id}/delete">
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
-        <form method="POST" action="/home/listings/update/${listing.listing_id}">
-          <button type="submit" class="btn btn-danger">update</button>
-        </form>
     </div>
 </div>`);
     return $listing;
