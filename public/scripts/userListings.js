@@ -10,6 +10,7 @@ $(document).ready(function() {
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
         <a href="/home/listings/${listing.listing_id}" class="btn btn-primary">View Listing</a>
+        <a href="/home/listings/update/${listing.listing_id}" class="btn btn-primary">Edit Listing</a>
         <button class="btn btn-secondary sold" data-listingid="${listing.listing_id}">Mark As Sold</button>
         <form method="POST" action="/home/listings/${listing.listing_id}/delete">
           <button type="submit" class="btn btn-danger">Delete</button>
