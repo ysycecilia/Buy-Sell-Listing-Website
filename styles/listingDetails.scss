@@ -49,6 +49,7 @@ body {
      padding: 30px;
     width: 99%;
     justify-content: center;
+    height: 60%;
 
     #each-listing {
       width: 80%;
@@ -114,4 +115,8 @@ body {
 
 body #sidebar div {
   padding: 15px;
+}
+
+header nav {
+  height: auto;
 }

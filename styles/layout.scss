@@ -44,9 +44,7 @@ body {
     height: 100%;
   }
 
-  .fix-top {
 
-  }
   .input-group {
     display: flex;
     flex-direction: column;
@@ -115,5 +113,9 @@ body {
 //   max-width: 7rem;
 //   max-height: 7rem;
 // }
+
+header nav {
+  height: auto;
+}
 
 
