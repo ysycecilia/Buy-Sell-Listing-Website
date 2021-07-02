@@ -25,25 +25,14 @@
       </div>
 
       <div class="nav-item nav-link col" id="links">
-
-        <a href=""> Search </a>
-        <!-- <div class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Fiction</a></li>
-            <li><a href="#">Non-fiction</a></li>
-            <li><a href="#"></a>Finance</li>
-            <li><a href="#">Politics</a></li>
-          </ul>
-        </div> -->
-        <a href=""> MyListings</a>
-
+        <a href="/"> Search </a>
+        <a href="/favourites"> MyFavourites</a>
+        <a href="/userListings"> MyListings</a>
       </div>
-      <div class="col" id="avatar">
-        <a href=""> <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg"
+      <!-- <div class="col" id="avatar">
+        <a href=""> <img src=<%= avatar_url %>
             class="imp-responsive img-rounded  .img-fluid. " style="max-width: 7rem; max-height: 7rem;" alt=""></a>
-      </div>
-
+      </div> -->
     </nav>
   </header>
 
@@ -55,9 +44,8 @@
           <div class="profile-sidebar">
             <!-- SIDEBAR USERPIC -->
             <div class="userpic">
-              <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg"
-                class="img-rounded imp-responsive  img-fluid img-thumbnail "
-                style="max-width: 150px; max-height: 150px;" alt="">
+              <h6>Seller </h6><br>
+                <img src="<%= avatar_url %>" class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 150px; max-height: 150px;"alt="">
             </div>
             <!-- END SIDEBAR USERPIC -->
             <!-- SIDEBAR USER TITLE -->
@@ -66,24 +54,26 @@
             </div>
 
             <div id="member">
-              Member since <%= member_since %>
+              Member since <br><%= (member_since).toString().substr(0,15) %>
             </div>
             <!-- END SIDEBAR USER TITLE -->
             <!-- SIDEBAR BUTTONS -->
             <div class="profile-userbuttons">
-              <button type="button" class="btn btn-info btn-sm">Message</button>
-            </div>
+              <button class="btn btn-primary">
+                <a href="mailto:<%= email %>?subject=Inquire for you listing on Lightmazon!" style="color: white;">Message me!</a>
+              </button>
             </div>
 
-
+            </div>
         </nav>
         <!-- Main container of listing -->
         <div class="col-xs-6 col-md-6 col-lg-9">
           <div id="listing-header">
-            <H4><%= title %></H4>
+            <title id="bookTitle"><h4></h4><%= title %></title>
           </div>
+
           <div id='gallery'>
-            <div class="card ml-1 mr-1">
+            <div class="card ml-1 mr-1" id="card">
               <i class="far fa-heart" data-listing="${listing.id}"
               data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart"> Add to Favourites</i>
 

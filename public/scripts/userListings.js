@@ -3,18 +3,17 @@ $(document).ready(function() {
   //create listings for a particular user
   const createListingElement = function(listing) {
     console.log(listing);
-    const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
-
-
+    const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px">
     <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
         <h5 class="card-title">${listing.title}</h5>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="/listingDetails" class="btn btn-primary">View Listing</a>
-        <form method="POST" action="/home/listings/${listing.id}/delete">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+        <a href="/home/listings/${listing.listing_id}" class="btn btn-primary">View Listing</a>
+        <button class="btn btn-secondary sold" data-listingid="${listing.listing_id}">Mark As Sold</button>
+        <form method="POST" action="/home/listings/${listing.listing_id}/delete">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     </div>
 </div>`);
     return $listing;
@@ -24,7 +23,7 @@ $(document).ready(function() {
   const renderListings = function(listings) {
     const $gallery = $('#gallery');
     $gallery.empty();
-
+console.log(listings)
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
     }
@@ -49,6 +48,18 @@ $(document).ready(function() {
       .then(function(listings) {
         console.log(listings);
         renderListings(listings); // -> undefined
+
+        //mark as sold - this has to be inside loadlisting to work
+        const $sold = $('.sold');
+
+        $sold.click(function(e) {
+          e.preventDefault();
+          $(e.target).html("Sold");
+          $.post(`/home/listings/${e.target.dataset.listingid}/sold`)
+            .then((data) => {
+              console.log('sold : ', data);
+            });
+        });
 
         //Notice: -----------------------------
         //please keep the whole favourite part sits inside loadLising.then()

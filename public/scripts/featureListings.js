@@ -24,12 +24,12 @@ $(document).ready(function() {
     $gallery.empty();
 
     for (const listing of listings) {
+
       $gallery.prepend(createListingElement(listing));
     }
   };
 
   const loadListings = function(url) {
-    // console.log(listings);
     return $.get({
       url: url,
       method: 'GET',
@@ -97,7 +97,7 @@ $(document).ready(function() {
     loadListings(`/home/search?${data}`)
   });
 
-//  loadListings(`/home/users/${user_id}/listings`)
+
 
 
   loadListings('/home');

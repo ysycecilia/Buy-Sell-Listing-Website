@@ -17,7 +17,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script type="text/javascript" src="/scripts/updateListing.js"></script>
+  <script type="text/javascript" src="/scripts/updateListings.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/4.5.0/lib/js/emojione.min.js"
     integrity="sha512-E2Ai/A9+KcoBm0lvfnd5krbr7TWUigQGWTfcoMToNpfmCvQKkZdTbpwyIM4PFbCGMtSmMjE/DAXGjVXpWGdFaQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -59,26 +59,27 @@
 
           <form id="listing-form">
             <label><h4>UPDATE LISTING</h4></label>
+            <input type="hidden" class="form-control" id="id" name="id" value="<%= id %>">
             <div class="form-group">
               <label for="Title">Title</label>
-              <input class="form-control" id="Title" name="title" aria-describedby="emailHelp" placeholder="Title">
+              <input class="form-control" id="Title" name="title" aria-describedby="emailHelp" placeholder="Title" value="<%= title %>">
             </div>
             <div class="form-group">
               <label for="listingDescription">Description</label>
-              <input class="form-control" id="Description" name="description" placeholder="Description">
+              <input class="form-control" id="Description" name="description" placeholder="Description" value="<%= description %>">
             </div>
 
             <div class="form-group">
               <label for="price">Price</label>
-              <input type="number" class="form-control" id="listingPrice" name="price" placeholder="Price">
+              <input type="number" class="form-control" id="listingPrice" name="price" placeholder="Price" value="<%= price %>" >
             </div>
             <div class="form-group">
               <label for="quantitiy">Quantity</label>
-              <input type="number" class="form-control" id="listingQuantitiy" name="quantity" placeholder="Quantity">
+              <input type="number" class="form-control" id="listingQuantitiy" name="quantity" placeholder="Quantity" value="<%= quantity %>">
             </div>
             <div class="form-group">
               <label for="listingPicture">Item picture</label>
-              <input type="url" class="form-control" id="listingPicture" name="cover_picture_url" placeholder="Item picture">
+              <input type="url" class="form-control" id="listingPicture" name="cover_picture_url" placeholder="Item picture" value="<%= cover_picture_url %>">
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Category</label>

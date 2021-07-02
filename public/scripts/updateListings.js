@@ -5,16 +5,17 @@ $(document).ready(function() {
     event.preventDefault();
     //Change data to queryformat
     const data = ($(this).serialize());
-   $.ajax({
-    url: `home/listings/${req.params.id}`,
-    method: 'POST',
-    data: data
-  }).done(function(data) {
-
-
+    const dataArray = ($(this).serializeArray());
     console.log(data);
-    $('form')[0].reset();
-  })
+    $.ajax({
+      url: `/home/listings/${dataArray[0].value}`,
+      method: 'POST',
+      data: data
+    }).done(function(data) {
+      console.log('This is Senay');
+      window.location.assign(`http://localhost:8080/home/listingDetails/${dataArray[0].value}`);
+      $('form')[0].reset();
+    });
 
-   });
+  });
 });

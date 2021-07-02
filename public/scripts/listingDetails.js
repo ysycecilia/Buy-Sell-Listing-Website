@@ -17,8 +17,8 @@ $(document).ready(function() {
   //Function renders all listings
   const renderListings = function(listing) {
     const $gallery = $('#gallery');
-   $gallery.empty();
-  $gallery.prepend(createListingElement(listing));
+    $gallery.empty();
+    $gallery.prepend(createListingElement(listing));
   };
 
   const loadListings = function(url) {
@@ -29,11 +29,10 @@ $(document).ready(function() {
       dataType: 'json'
     })
       .then(function(listing) {
+        console.log(listing)
         // console.log('This is senay +++', listing)
         $("#listing-header").empty().append(`<h4>${listing.title}'s details</h4>`);
         // $("#member").empty().append(`<span> Member since ${users.member_since}</span>`);
-
-
 
         renderListings(listing); // -> undefined
 
@@ -50,13 +49,6 @@ $(document).ready(function() {
             $(e.target).removeClass("far fa-heart").addClass("fas fa-heart").css("color", "red");
             $(e.target).data('id', "fas-fa-heart");
 
-            // $.ajax({
-            //   method: "POST",
-            //   url: "/home/users/:user_id/favourites",
-            //   data: {listing_id: $(e.target).data("card")}
-            // }).done((data) => {
-            //   console.log('fav saved : ', data);
-            // });
             let user_id = $(this).attr('data-user');
 
             $.post(`/home/users/${user_id}/favourites`,
@@ -83,15 +75,15 @@ $(document).ready(function() {
               });
           }
         });
-      })
-  }
+      });
+  };
 
-  const $search = $('#search-item-form')
+  const $search = $('#search-item-form');
   $search.submit(function(event) {
     event.preventDefault();
 
     const data = $(this).serialize();
-    loadListings(`/home/search?${data}`)
+    loadListings(`/home/search?${data}`);
   });
   loadListings(`/home/listing/:id`);
-})
+});

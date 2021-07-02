@@ -68,6 +68,9 @@ app.get("/updateListing", (req, res) => {
   res.render("updateListing");
 
 });
+// app.get("/listingDetails/:id", (req, res) => {
+//   res.render("listingDetails");
+// });
 app.get("/listingDetails", (req, res) => {
   res.render("listingDetails");
 });
