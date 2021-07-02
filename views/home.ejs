@@ -23,7 +23,7 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
+    <nav id="favourite-nav" class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
 
       <div class="navbar-brand col" style="
       padding-left: 0px;">
@@ -35,7 +35,7 @@
       <div class="nav-item nav-link col" id="links">
 
         <a href=""> Search </a>
-         <!-- <div class="dropdown">
+          <!-- <div class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="#">Men</a></li>
@@ -44,7 +44,7 @@
             <li><a href="#">Bottom Wear</a></li>
           </ul>
         </div> -->
-        <a href="/seller"> MyListings</a>
+        <a href="/mylistings"> MyListings</a>
         <a href="/favourites"> MyFavourites</a>
       </div>
       <div class="col" id="avatar">
@@ -59,22 +59,24 @@
       <div class='row'>
         <div class="col-xs-6 col-md-6 col-lg-3 wrapper" >
           <nav id='sidebar'>
-          <!-- <div class="input-group">
+           <div class="input-group">
             <div class="form-outline">
+              <label for="search-listing-form">Searching for anyting...</label>
               <input type="search" id="form1" class="form-control" />
             </div>
-            <button type="button" class="btn btn-primary">
+
+            <button type="submit" class="btn btn-primary" style="margin:5px; width: 80px;">
             Search
           </button>
-        </div> -->
+        </div>
         <hr style="width:100%;text-align:left;margin-left:0">
         <form id="search-item-form" class="search-item-form">
 
           <div class="search-item-form__field-wrapper">
             <label for="search-item-form__minimum-price">Minimum Price</label>
-            <input type="number" name="minimum_price" placeholder="Minimum Price" id="search-item-form__minimum-price">
+            <input type="number" name="minimum_price"  id="search-item-form__minimum-price">
             <label for="search-item-form__maximum-price">Maximum Price</label>
-            <input type="number" name="maximum_price" placeholder="Maximum Price" id="search-item-form__maximum-price">
+            <input type="number" name="maximum_price"  id="search-item-form__maximum-price">
           </div>
 
           <div class="search-item-form__field-wrapper">

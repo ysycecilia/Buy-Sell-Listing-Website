@@ -20,6 +20,7 @@ module.exports = (db) => {
     db.query(`select email from users where users.id = ${req.session.user_id};`)
       .then(data => {
         userEmail = data.rows[0].email;
+
       });
     res.redirect('/');
   });
@@ -27,11 +28,11 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT listings.* FROM listings WHERE status = TRUE;`)
       .then(data => {
-        res.json(data.rows)
+        res.json(data.rows);
       })
 
       .catch(err => {
-        console.log("error", err)
+        console.log("error", err);
         res
           .status(500)
           .json({ error: err.message });
@@ -41,43 +42,41 @@ module.exports = (db) => {
   router.get("/listings/:id", (req, res) => {
 
     db.query(`select * from listings JOIN users ON user_id = users.id WHERE listings.id =$1;`, [req.params.id])
-    .then(data => {
-      const item = data.rows[0];
-      res.render('listingDetails', item);
+      .then(data => {
+        const item = data.rows[0];
+        res.render('listingDetails', item);
 
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
   //route to get listing update
   router.get("/listings/update/:id", (req, res) => {
 
     db.query(`SELECT id, title, price, description, quantity, user_id, cover_picture_url FROM listings WHERE id =$1;`, [req.params.id])
-    .then(data => {
-      const item = data.rows[0];
-      res.render('updateListing', item);
-
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
+      .then(data => {
+        const item = data.rows[0];
+        res.render('updateListing', item);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
 
 
   router.get("/users/listings", (req, res) => {
 
-    db.query(`SELECT listings.* FROM listings
+    db.query(`SELECT listings.*, listings.id as listing_id, users.*, users.id = user_id FROM listings
     JOIN users ON listings.user_id = users.id
-    WHERE user_id =$1 ;`, [req.session.user_id])
+    WHERE user_id =$1;`, [req.session.user_id])
       .then(data => {
-        const item = data.rows[0];
-        //note
-        res.render('userListings', item);
+        const item = data.rows;
+        res.json(item);
       })
       .catch(err => {
         res
@@ -101,53 +100,18 @@ module.exports = (db) => {
       });
   });
 
-  // Get all listings favourited by a user
-  router.get("/users/:user_id/favourites", (req, res) => {
-
-    console.log(req.params);
-    db.query(`SELECT listings.*, users.* FROM users JOIN favourites ON user_id = users.id JOIN listings ON listings.id = listing_id where users.id = ${req.params.user_id}`)
-
-      .then(data => {
-
-        res.json(data.rows);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-  router.post("/users/:user_id/favourites", (req, res) => {
-    db.query(`INSERT INTO favourites(listing_id, user_id)
-    VALUES($1, $2)`, [req.body.listing_id, req.params.user_id])
-      .then(data => {
-        const favourites = data.rows;
-        console.log(favourites);
-        res.json(favourites);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
   router.post("/listings/:id/sold", (req, res) => {
 
     db.query(`UPDATE listings
     SET status = FALSE
     WHERE user_id =$1 AND listings.id =$2;`,[req.session.user_id, req.params.id])
-    .then(data => {
-      res.json(data)
-    })
+      .then(data => {
+        res.json(data);
+      });
 
-  })
-
-
+  });
 
   router.post("/listings", (req, res) => {
-    //console.log("This is request", req.body)
     const title = req.body.title;
     const description = req.body.description;
     const price = req.body.price;
@@ -166,7 +130,7 @@ module.exports = (db) => {
       .then(data => {
         const listing = data.rows;
         res.json({listing});
-        res.redirect('/')
+        res.redirect('/');
       })
       .catch(err => {
         res
@@ -195,7 +159,7 @@ module.exports = (db) => {
       queryString += ` AND price <= $${queryParams.length} `;
     }
     queryString += ` GROUP BY listings.id; `;
-    console.log('line', queryString);
+    // console.log('line', queryString);
     db.query(queryString, queryParams)
       .then(data => {
         const result = data.rows;
@@ -219,7 +183,7 @@ module.exports = (db) => {
     const price = req.body.price;
     const quantity = req.body.quantity;
     const category_id = req.body.category_id;
-    const status = req.body.status;
+    const status = 'TRUE';
     const created_at = req.body.created_at;
     const cover_picture_url = req.body.cover_picture_url;
     // const user_id = req.session.userId;
@@ -235,9 +199,7 @@ module.exports = (db) => {
     [title, description, user_id, price, quantity, category_id, status, created_at, cover_picture_url, listing_id])
       .then(data => {
         const listing = data.rows;
-
-        console.log('This is it +++', data)
-       res.json(listing);
+        res.json(listing);
       //  res.redirect('/');
       })
       .catch(err => {
@@ -259,9 +221,7 @@ module.exports = (db) => {
       .then(
         // res.status(200).send(`Listing deleted with ID: ${listing_id}`)
         res.redirect("/")
-
       )
-
       .catch(err => {
         res
           .status(500)
@@ -336,5 +296,3 @@ module.exports = (db) => {
 
   return router;
 };
-
-

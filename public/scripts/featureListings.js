@@ -14,6 +14,7 @@ $(document).ready(function() {
         <a href="home/listings/${listing.id}" class="btn btn-primary">View Listing</a>
     </div>
 </div>`);
+// /home/listings/${listing.id}
     return $listing;
   };
 

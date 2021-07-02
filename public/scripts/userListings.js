@@ -2,18 +2,16 @@ $(document).ready(function() {
   console.log('This is listings');
   //create listings for a particular user
   const createListingElement = function(listing) {
-    console.log(listing)
-    const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px;">
-
-
+    console.log(listing);
+    const $listing = $(`<div class="card ml-1 mr-1" style="width: 300px">
     <img src=${listing.cover_picture_url} class="card-img-top" alt="..." id="listing-image">
     <div class="card-body text-center">
         <h5 class="card-title">${listing.title}</h5>
         <h4 class="card-title">$${listing.price}</h4>
         <p class="card-text">${listing.description}</p>
-        <a href="#" class="btn btn-primary">View Listing</a>
-        <button class="btn btn-secondary sold" data-listingid="${listing.id}">Mark As Sold</button>
-        <form method="POST" action="/home/listings/${listing.id}/delete">
+        <a href="/home/listings/${listing.listing_id}" class="btn btn-primary">View Listing</a>
+        <button class="btn btn-secondary sold" data-listingid="${listing.listing_id}">Mark As Sold</button>
+        <form method="POST" action="/home/listings/${listing.listing_id}/delete">
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
     </div>
@@ -25,10 +23,19 @@ $(document).ready(function() {
   const renderListings = function(listings) {
     const $gallery = $('#gallery');
     $gallery.empty();
-
+console.log(listings)
     for (const listing of listings) {
       $gallery.prepend(createListingElement(listing));
     }
+
+    const emailTO = listings[0].email;
+    $('#email').attr("href", `mailto:${emailTO}?subject=Inquire for you listing on Lightmazon!`);
+
+    const userPic = listings[0].avatar_url;
+    $('#userAvatar').attr("src", `${userPic}`);
+
+    const userName = listings[0].name;
+    $('.profile-usertitle-name').text(`${userName}`);
 
   };
 
@@ -39,21 +46,21 @@ $(document).ready(function() {
       dataType: 'json'
     })
       .then(function(listings) {
-        console.log(listings)
+        console.log(listings);
         renderListings(listings); // -> undefined
 
         //mark as sold - this has to be inside loadlisting to work
-        const $sold = $('.sold')
-       
-        $sold.click(function(e){
+        const $sold = $('.sold');
+
+        $sold.click(function(e) {
           e.preventDefault();
           $(e.target).html("Sold");
           $.post(`/home/listings/${e.target.dataset.listingid}/sold`)
-              .then((data) => {
-                console.log('sold : ', data);
-              });
+            .then((data) => {
+              console.log('sold : ', data);
+            });
         });
-        
+
         //Notice: -----------------------------
         //please keep the whole favourite part sits inside loadLising.then()
         //it need the loaded elements to be liked or it won't work
@@ -100,8 +107,8 @@ $(document).ready(function() {
               });
           }
         });
-      })
-  }
+      });
+  };
   // const loadListings = (listings) => {
   //   // fetch the listings
   //   $.get('/home')
@@ -110,20 +117,15 @@ $(document).ready(function() {
   //       renderListings(listings);
   //     });
   // };
-  const $search = $('#search-item-form')
+  const $search = $('#search-item-form');
   $search.submit(function(event) {
     event.preventDefault();
 
     const data = $(this).serialize();
-    loadListings(`/home/search?${data}`)
+    loadListings(`/home/search?${data}`);
   });
 
-  
-  
-
-  
-
-  loadListings('/home/users/listings')
+  loadListings('/home/users/listings');
 
   //loadListings('/home');
 });
