@@ -3,6 +3,8 @@ const router  = express.Router();
 
 
 module.exports = (db) => {
+
+
   //if id exists, return its email
   const getEmailBySessionID = (id) => {
 
@@ -152,7 +154,7 @@ module.exports = (db) => {
     const quantity = req.body.quantity;
     const category_id = req.body.category_id;
 
-    const created_at = req.body.created_at;
+    const created_at = timeago.format(Date.now());
     const cover_picture_url = req.body.cover_picture_url;
 
     // const user_id = req.session.userId;

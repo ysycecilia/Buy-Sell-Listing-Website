@@ -1,7 +1,7 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: rgb(231, 226, 226);
+  background-color: rgb(20, 146, 195);
 
   nav {
     height: 150px;
@@ -42,7 +42,8 @@ body {
   #gallery {
      display: flex;
      flex-flow: row wrap;
-     padding: 30px
+     padding: 30px;
+     background-color: rgb(159, 184, 194);
 
     }
     .card {

@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-  <title>${users.id}'s' listings</title>
+  <title>
+    <%= title %>
+  </title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
 
@@ -11,37 +13,39 @@
   <link rel="stylesheet" href="/styles/listingDetails.css" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"
+    integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 
 <body>
   <header>
-    <nav class="navbar navbar-default fixed-top">
-      <div class="navbar-brand col">
-        <a img id="logo-image" src="images/logo.png" class="img-rounded"> </a>
+    <nav class="navbar navbar-default navbar-light bg-light fixed-top">
+      <div class="navbar-brand col" style="
+      padding-left: 0px;">
+        <a href="/">
+          <img id="logo-image" src="images/logo.png" class="img-rounded">
+        </a>
       </div>
 
       <div class="nav-item nav-link col" id="links">
 
+
         <a href=""> Search </a>
-        <!-- <div class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Fiction</a></li>
-            <li><a href="#">Non-fiction</a></li>
-            <li><a href="#"></a>Finance</li>
-            <li><a href="#">Politics</a></li>
-          </ul>
-        </div> -->
+        <a href=""> MyFavourites </a>
         <a href=""> MyListings</a>
 
       </div>
       <div class="col" id="avatar">
-        <a href=""> <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg"
-            class="imp-responsive img-rounded  .img-fluid. " style="max-width: 7rem; max-height: 7rem;" alt=""></a>
+        <a href=""> <img src=' <%= avatar_url %>' class="imp-responsive img-rounded  img-fluid"
+            class="img-rounded imp-responsive  img-fluid img-thumbnail " style="max-width: 7rem; max-height: 7rem;"
+            alt="<%= name[0].toUpperCase() %>"></a>
       </div>
 
     </nav>
@@ -55,14 +59,13 @@
           <div class="profile-sidebar">
             <!-- SIDEBAR USERPIC -->
             <div class="userpic">
-              <img src="https://i.pinimg.com/originals/dd/a4/28/dda4284972f5a75620d13d3722eb6cea.jpg"
-                class="img-rounded imp-responsive  img-fluid img-thumbnail "
-                style="max-width: 150px; max-height: 150px;" alt="">
+              <img src=' <%= avatar_url %>' class="img-rounded imp-responsive  img-fluid img-thumbnail "
+                style="max-width: 150px; max-height: 150px;" alt="<%= name[0].toUpperCase() %>">
             </div>
             <!-- END SIDEBAR USERPIC -->
             <!-- SIDEBAR USER TITLE -->
             <div class="profile-usertitle">
-                <%= name %>
+              <%= name %>
             </div>
 
             <div id="member">
@@ -73,47 +76,61 @@
             <div class="profile-userbuttons">
               <button type="button" class="btn btn-info btn-sm">Message</button>
             </div>
-            </div>
+          </div>
 
 
         </nav>
         <!-- Main container of listing -->
         <div class="col-xs-6 col-md-6 col-lg-9">
           <div id="listing-header">
-            <H4><%= title %></H4>
+            <H4>
+              <%= title %>
+            </H4>
           </div>
           <div id='gallery'>
-            <div class="card ml-1 mr-1">
-              <i class="far fa-heart" data-listing="${listing.id}"
-              data-user="${listing.user_id}" data-id="far-fa-heart" id="fas-fa-heart"> Add to Favourites</i>
+            <div class="card ml-1 mr-1" id='each-listing'>
+              <i class="far fa-heart" data-listing="${listing.id}" data-user="${listing.user_id}" data-id="far-fa-heart"
+                id="fas-fa-heart"> Add to Favourites</i>
 
               <img src='<%= cover_picture_url %>' class="card-img-top" alt="..." id="listing-image">
               <div class="card-body text-center">
-                  <h5 class="card-title"><%= title %></h5>
+                <h5 class="card-title">
+                  <%= title %>
+                </h5>
 
-                  <h4 class="card-title">$<%= price %></h4>
-                  <p class="card-text"><%= description  %></p>
+                <h4 class="card-title">$<%= price %>
+                </h4>
+                <p class="card-text">
+                  <%= description %>
+                </p>
 
               </div>
-          </div>
+            </div>
 
           </div>
 
           <!-- </div> -->
         </div>
       </div>
-      </div>
+    </div>
     </div>
   </main>
   <!-- Script files -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/4.5.0/lib/js/emojione.min.js"
     integrity="sha512-E2Ai/A9+KcoBm0lvfnd5krbr7TWUigQGWTfcoMToNpfmCvQKkZdTbpwyIM4PFbCGMtSmMjE/DAXGjVXpWGdFaQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/listingDetails.js"></script>
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/listingDetails.js"></script>
 
 </body>
 
