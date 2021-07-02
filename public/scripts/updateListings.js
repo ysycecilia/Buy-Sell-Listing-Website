@@ -13,7 +13,7 @@ $(document).ready(function() {
       data: data
     }).done(function(data) {
       console.log('This is Senay');
-      window.location.assign(`http://localhost:8080/home/listingDetails/${dataArray[0].value}`);
+      window.location.assign(`http://localhost:8080/home/listings/${dataArray[0].value}`);
       $('form')[0].reset();
     });
 

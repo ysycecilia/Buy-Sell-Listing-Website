@@ -24,7 +24,7 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    db.query(`SELECT listings.* FROM listings WHERE status = TRUE;`)
+    db.query(`SELECT * FROM listings where status <> 'false';`)
       .then(data => {
         res.json(data.rows);
       })
